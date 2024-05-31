@@ -1,10 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import MainStack from './src/MainStack';
 
-export default function App() {
+export default function LoginScreen() {
   return (
-    <MainStack />
+    <View style={styles.container}>
+      <Text>Login Screen</Text>
+    </View>
   );
 }
 

@@ -1,3 +1,3 @@
-// import { COLORS, SIZES, FONTFAMILIES} from "./theme";
+import { COLORS, SIZES, FONTFAMILIES} from "./theme";
 
-// export { COLORS, SIZES, FONTFAMILIES };
+export { COLORS, SIZES, FONTFAMILIES };

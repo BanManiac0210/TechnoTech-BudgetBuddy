@@ -10,6 +10,10 @@ export default function SearchBar() {
         setText(inputText)
     }
 
+    const handleBlur = () => {
+        setText('')
+    }
+
     return (
         <View className="w-full h-[50] justify-center items-center rounded-full bg-gray-300 px-3 py-2 flex-row space-x-2">
             <Icon name="search" size={25} color={COLORS.purple_primary} />
@@ -19,6 +23,7 @@ export default function SearchBar() {
                     placeholder="Nhập để tìm kiếm"
                     onChangeText={changeText}
                     value={text}
+                    onBlur={handleBlur}
                 />
             </View>
             <Icon name="user-circle" size={25} color={COLORS.purple_primary} />

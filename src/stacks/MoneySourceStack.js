@@ -11,17 +11,17 @@ export default function MoneySourceStack() {
   return (
       <Stack.Navigator initialRouteName="MSMainScreen">
         <Stack.Screen
-          name="MSMainScreen"
+          name="MoneySourceScreen"
           component={MoneySourceScreen}
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="MSDetailScreen"
+          name="MoneySourceDetailScreen"
           component={MoneySourceDetailScreen}
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="MSEditScreen"
+          name="MoneySourceEditScreen"
           component={MoneySourceEditScreen}
           options={{ headerShown: false }}
         />

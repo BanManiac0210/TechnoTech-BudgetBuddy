@@ -6,8 +6,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { COLORS, FDATA } from '../../constants';
 import IncomeExpenseTag from '../../components/IncomeExpenseTag';
 import HistoryCardMain from '../../components/HistoryCard/HistoryCardMain';
+import formattedValue from '../../components/formattedValue';
 
-export default function HomeScreen({navigation, tabBarHeight}) {
+export default function HomeScreen({navigation}) {
   const formattedValue = ({value}) => {
     return value.toLocaleString('vi-VN', {
         style: 'currency',
@@ -23,7 +24,7 @@ export default function HomeScreen({navigation, tabBarHeight}) {
     <SafeAreaView>
       <View className="flex-col bg-white w-screen h-screen p-2.5 space-y-1">
         <SearchBar/>  
-        <View className="flex-col justify-center w-full pt-2.5 space-y-4">
+        <View className="flex-col justify-center w-full pt-2.5 px-5 space-y-4">
           <View className="flex-row justify-start w-full bg-blue-100 px-5 pt-2 pb-5 space-x-3 rounded-lg">
             <View className="flex-col items-start  pt-2.5 space-y-3">
               <View className="flex-row items-start space-x-2 justify-start">
@@ -42,10 +43,10 @@ export default function HomeScreen({navigation, tabBarHeight}) {
           <IncomeExpenseTag incomeValue={FDATA.incomeValue} expenseValue={FDATA.expenseValue}/>
         </View>
 
-        <View className="flex-1 items-center flex-col">
+        <View className="flex-1 items-center flex-col px-5">
           <Text className="font-bold text-2xl text-purple-900 text-start">Lịch sử</Text>
           <View className="w-full h-[2] bg-purple-900 my-1 opacity-10"></View>
-          <ScrollView className="w-full "contentContainerStyle={{ paddingBottom: 120 }}>
+          <ScrollView className="w-full ">
             {FDATA.mainHistory.map((item, index) => (
               <HistoryCardMain
                 key={index}

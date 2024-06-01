@@ -7,7 +7,7 @@ import { COLORS, FDATA } from '../../constants';
 import IncomeExpenseTag from '../../components/IncomeExpenseTag';
 import HistoryCardMain from '../../components/HistoryCard/HistoryCardMain';
 
-export default function HomeScreen({navigation}) {
+export default function HomeScreen({navigation, tabBarHeight}) {
   const formattedValue = ({value}) => {
     return value.toLocaleString('vi-VN', {
         style: 'currency',
@@ -45,7 +45,7 @@ export default function HomeScreen({navigation}) {
         <View className="flex-1 items-center flex-col">
           <Text className="font-bold text-2xl text-purple-900 text-start">Lịch sử</Text>
           <View className="w-full h-[2] bg-purple-900 my-1 opacity-10"></View>
-          <ScrollView className="w-full ">
+          <ScrollView className="w-full "contentContainerStyle={{ paddingBottom: 120 }}>
             {FDATA.mainHistory.map((item, index) => (
               <HistoryCardMain
                 key={index}

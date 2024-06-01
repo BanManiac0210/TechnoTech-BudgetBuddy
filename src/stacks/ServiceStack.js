@@ -20,7 +20,7 @@ export default function ServiceStack() {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="AddMSScreen"
+          name="AddMoneySourceScreen"
           component={AddMoneySourceScreen}
           options={{ headerShown: false }}
         />

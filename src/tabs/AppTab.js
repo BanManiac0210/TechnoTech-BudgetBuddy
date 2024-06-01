@@ -16,73 +16,67 @@ const Tab = createBottomTabNavigator();
 
 export default function AppTab() {
     return (
-        <NavigationContainer>
-            <Tab.Navigator
-                screenOptions={({ route }) => ({
-                    tabBarLabel: ({ focused }) => {
-                        // return <Text style={styles.labelFont}>{route.name}</Text>
-                        return (!focused || route.name == "Tạo")? null : <Text style={styles.labelFont}>{route.name}</Text>
-                      },
-                    tabBarActiveTintColor: COLORS.purple_primary,
-                    tabBarInactiveTintColor: 'gray',
-                })}
-            >
-                <Tab.Screen
-                    name="Trang chủ"
-                    component={HomeStack}
-                    options={{ 
-                        headerShown: false,
-                        tabBarIcon: ({ color, size, focused }) => (
-                            <Icon name="home" size={25} color={COLORS.purple_primary} />
-                        ),
-                    }}
-                ></Tab.Screen>
-
-                <Tab.Screen 
-                    name="Nguồn tiền"
-                    component={MoneySourceStack}
-                    options={{ 
-                        headerShown: false ,
-                        tabBarIcon: ({ color, size, focused }) => (
-                            <Icon name="money" size={25} color={COLORS.purple_primary} />
-                        ),
-                    }}
-                ></Tab.Screen>
-
-                <Tab.Screen 
-                    name="Tạo"
-                    component={ServiceStack}
-                    options={{ 
-                        headerShown: false ,
-                        tabBarIcon: ({ color, size, focused }) => (
-                            <Icon name="plus-circle" size={50} color={COLORS.purple_primary} />
-                        ),
-                    }}
-                ></Tab.Screen>
-
-                <Tab.Screen 
-                    name="Báo cáo"
-                    component={ReportStack}
-                    options={{ 
-                        headerShown: false ,
-                        tabBarIcon: ({ color, size, focused }) => (
-                            <Icon name="bar-chart-o" size={25} color={COLORS.purple_primary} />
-                        ),
-                    }}
-                ></Tab.Screen>
-
-                <Tab.Screen 
-                    name="Cài đặt"
-                    component={SettingStack}
-                    options={{ 
-                        headerShown: false ,
-                        tabBarIcon: ({ color, size, focused }) => (
-                            <Icon name="gear" size={25} color={COLORS.purple_primary} />
-                        ),
-                    }}
-                ></Tab.Screen>
-            </Tab.Navigator>
-        </NavigationContainer>
+        <Tab.Navigator
+            screenOptions={({ route }) => ({
+                tabBarLabel: ({ focused }) => {
+                    // return <Text style={styles.labelFont}>{route.name}</Text>
+                    return (!focused || route.name == "Tạo")? null : <Text style={styles.labelFont}>{route.name}</Text>
+                  },
+                tabBarActiveTintColor: COLORS.purple_primary,
+                tabBarInactiveTintColor: 'gray',
+            })}
+        >
+            <Tab.Screen
+                name="Trang chủ"
+                component={HomeStack}
+                options={{ 
+                    headerShown: false,
+                    tabBarIcon: ({ color, size, focused }) => (
+                        <Icon name="home" size={25} color={COLORS.purple_primary} />
+                    ),
+                }}
+            ></Tab.Screen>
+            <Tab.Screen 
+                name="Nguồn tiền"
+                component={MoneySourceStack}
+                options={{ 
+                    headerShown: false ,
+                    tabBarIcon: ({ color, size, focused }) => (
+                        <Icon name="money" size={25} color={COLORS.purple_primary} />
+                    ),
+                }}
+            ></Tab.Screen>
+            <Tab.Screen 
+                name="Tạo"
+                component={ServiceStack}
+                options={{ 
+                    headerShown: false ,
+                    tabBarIcon: ({ color, size, focused }) => (
+                        <Icon name="plus-circle" size={50} color={COLORS.purple_primary} />
+                    ),
+                }}
+            ></Tab.Screen>
+            <Tab.Screen 
+                name="Báo cáo"
+                component={ReportStack}
+                options={{ 
+                    headerShown: false ,
+                    tabBarIcon: ({ color, size, focused }) => (
+                        <Icon name="bar-chart-o" size={25} color={COLORS.purple_primary} />
+                    ),
+                }}
+            ></Tab.Screen>
+            <Tab.Screen 
+                name="Cài đặt"
+                component={SettingStack}
+                options={{ 
+                    headerShown: false ,
+                    tabBarIcon: ({ color, size, focused }) => (
+                        <Icon name="gear" size={25} color={COLORS.purple_primary} />
+                    ),
+                }}
+            ></Tab.Screen>
+        </Tab.Navigator>
     );
 }
 

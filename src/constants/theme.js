@@ -2,6 +2,7 @@ const COLORS = {
   purple_primary: "#4C1D95",
   blue_primary: "#DDE4FF",
   red: "#FF002E",
+  background_popup: "#FBF4FE",
   extender_1: "#9984CF",
   extender_2: "#B194D7",
   extender_3: "#AD8DD3",

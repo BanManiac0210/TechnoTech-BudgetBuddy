@@ -4,7 +4,7 @@ import MainStack from './src/MainStack';
 
 export default function App() {
   return (
-    <MainStack />
+      <MainStack />
   );
 }
 

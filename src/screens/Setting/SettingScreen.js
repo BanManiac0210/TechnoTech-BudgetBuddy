@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Text, View, Switch, TouchableOpacity, Modal } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -17,15 +18,24 @@ export default function SettingScreen({ navigation }) {
   const toggleBudgetSwitch = () => setStateBudget(previousState => !previousState)
   const [isPopupVisible, setPopupVisible] = useState(false);
   const openPopup = () => {
-    setPopupVisible(previousState => !previousState)
+    console.log("Opening popup");
+    setPopupVisible(true)
   };
   const closePopup = () => {
-    setPopupVisible(previousState => !previousState)
+    console.log("Closing popup");
+    setPopupVisible(false)
   };
   const navigateToLogin = () => {
     navigation.navigate('AuthStack', { screen: 'LoginScreen' });
   }
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      // Reset popup visibility when screen is focused
+      setPopupVisible(false);
+    });
 
+    return unsubscribe;
+  }, [navigation]);
   return (
     <SafeAreaView>
       <PopupAsk 

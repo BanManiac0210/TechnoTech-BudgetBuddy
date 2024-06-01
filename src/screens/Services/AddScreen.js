@@ -27,7 +27,7 @@ export default function AddScreen({navigation}) {
   return (
     <SafeAreaView>
       <View className="flex-col bg-white w-screen h-screen p-2.5 space-y-1">        
-        <View className="flex-col flex-1 pb-[80] px-[20] justify-end space-y-10">
+        <View className="flex-col flex-1 pb-[200] px-[20] justify-end space-y-10">
           <View className="flex-col flex-1 px-[20] justify-end items-center space-y-5">
             <TouchableOpacity className="w-full justify-center items-center flex-row bg-purple-900 p-2 rounded space-x-3" onPress={toAddMoneySource}>
               <Icon name="credit-card" size={30} color="white" />

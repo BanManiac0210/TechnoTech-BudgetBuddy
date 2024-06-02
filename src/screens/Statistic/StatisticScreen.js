@@ -9,6 +9,7 @@ import formattedValue from '../../components/formattedValue';
 import CollapsibleMenuButton from '../../components/StatisticScreenComponents/CollapsibleMenuButton';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Chart from '../../components/StatisticScreenComponents/Chart';
+import IncomeExpenseTag from '../../components/IncomeExpenseTag';
 
 
 export default function MoneySourceScreen() { 
@@ -29,6 +30,7 @@ export default function MoneySourceScreen() {
           showsVerticalScrollIndicator={false}
         >
           {/* BUDGET */}
+          <View>
           <View className="flex-row mb-2">
             <Text className="font-bold flex-1 text-left text-xl text-purple-900">Ngân sách</Text> 
             {condition && <Icon name="star" size={20} color="purple" style={{ marginLeft: -120 , marginTop: 4}} />}
@@ -36,30 +38,32 @@ export default function MoneySourceScreen() {
               <Text className="font-bold flex-1 text-right text-xl text-purple-900">Cài đặt ngân sách</Text> 
             </TouchableOpacity>
           </View>
-
+          <View>
           <CollapsibleMenuButton
             iconType={FDATA.moneySources[0].iconType}
             moneySourceName={FDATA.moneySources[0].moneySourceName}
             balance={FDATA.currentBalance}
           />
+          </View>
+          </View>
  
 
           {/* REPORT*/}
-          <Text className="font-bold flex-1 my-3 text-left text-xl text-purple-900">Báo cáo</Text>
-          
-          {FDATA.savings.map((item, index) => (
-            <MoneySource
-              key={index}
-              iconType={item.iconType}
-              moneySourceName={item.moneySourceName}
-              balance={item.balance}
+          <View>
+            <Text className="font-bold my-3 text-left text-xl text-purple-900">Báo cáo</Text>
+            <IncomeExpenseTag
+              incomeValue={FDATA.incomeValue}
+              expenseValue={FDATA.expenseValue}
             />
-          ))}
+          </View>
 
           {/* CHART */}
-
-          <Text className="font-bold flex-1 my-3 text-left text-xl text-purple-900">Biểu đồ trực quan</Text>
-          <Chart/>
+          <View >
+            <Text className="font-bold my-3 text-left text-xl text-purple-900">Biểu đồ trực quan</Text>
+          
+            <Chart/>
+          </View>
+          
 
         </ScrollView>
     </View>

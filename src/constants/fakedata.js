@@ -1,7 +1,7 @@
 // import MoneySource from "../components/MoneySource";
 
 const FDATA = {
-    currentBalance: 1000,
+    currentBalance: 100000,
     incomeValue: 350000,
     expenseValue: 4500000,
     tagName: "Ăn uống",

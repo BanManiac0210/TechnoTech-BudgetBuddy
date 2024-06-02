@@ -48,8 +48,8 @@ return (
           }}>
             <View className="flex-row justify-center items-center">
                 <Icon name={iconType} size={30} color={COLORS.purple_primary} />
-                <Text className="text-lg text-center font-bold text-violet-900">Đã chi tiêu: </Text>
-              </View>
+                <Text className="text-sm text-center font-bold text-violet-900">Tạo ngân sách cho danh mục mới</Text>
+            </View>
           </View>
         </TouchableOpacity>
       </Collapsible>

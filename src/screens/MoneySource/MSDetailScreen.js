@@ -1,14 +1,13 @@
-import { StatusBar } from 'expo-status-bar';
 import { Text, TouchableOpacity, View, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import { COLORS, FDATA } from '../../constants';
+import { useNavigation } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import formattedValue from '../../components/formattedValue';
 import IncomeExpenseTag from '../../components/IncomeExpenseTag';
 import HistoryCardMS from '../../components/HistoryCard/HistoryCardMS';
-import { useNavigation } from '@react-navigation/native';
 
-export default function MoneySourceDetailScreen() {
+export default function MoneySourceDetailScreen({moneySourceID}) {
   const navigation = useNavigation();
   return (
     <SafeAreaView>
@@ -42,6 +41,7 @@ export default function MoneySourceDetailScreen() {
                     key={index}
                     cateName={item.cateName}
                     cateIcon={item.cateIcon}
+                    cateColor={FDATA.tagColor}
                     date={item.date}
                     value={item.value}
                     description={item.description}

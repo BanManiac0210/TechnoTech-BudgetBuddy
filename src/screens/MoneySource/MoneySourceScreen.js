@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
 import { Text, View, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import SearchBar from '../../components/SearchBar';
@@ -9,11 +8,11 @@ import formattedValue from '../../components/formattedValue';
 export default function MoneySourceScreen() { 
   return (
     <SafeAreaView>
-      <View className="flex-col bg-white w-screen h-screen p-2.5 space-y-1">
+      <View className="flex-col bg-white w-screen h-screen p-2.5 space-y-1 ">
           <SearchBar/>  
           
         <ScrollView 
-          className="flex-1 px-5 py-3 flex-col" 
+          className="flex-1 px-5 py-3 flex-col " 
           contentContainerStyle={{paddingBottom: 80}} 
           showsVerticalScrollIndicator={false}
         >
@@ -25,6 +24,7 @@ export default function MoneySourceScreen() {
           {FDATA.moneySources.map((item, index) => (
             <MoneySource
               key={index}
+              // Theem id
               iconType={item.iconType}
               moneySourceName={item.moneySourceName}
               balance={item.balance}
@@ -47,6 +47,7 @@ export default function MoneySourceScreen() {
           {FDATA.debts.map((item, index) => (
             <MoneySource
               key={index}
+              moneySourceID={item.moneySourceID}
               iconType={item.iconType}
               moneySourceName={item.moneySourceName}
               balance={item.balance}

@@ -1,7 +1,7 @@
 import { ScrollView, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useState, useEffect } from 'react';
-import { COLORS, FDATA } from '../../constants';
+import { FDATA } from '../../constants';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import IconPicker from '../../components/Picker/IconPicker';
@@ -9,7 +9,7 @@ import ColorPicker from '../../components/Picker/ColorPicker';
 import CustomNumpad from '../../components/CustomNumpad';
 import PopupConfirm from '../../components/Popups/PopupConfirm';
 
-export default function AddDebtScreen() {
+export default function AddInitMoneySourceScreen() {
   const navigation = useNavigation();
   var tempColor = "#DA70D6";
   var fakeIcon = "money";
@@ -23,7 +23,7 @@ export default function AddDebtScreen() {
     setPopupVisible(true)
   };
   const popupNavigate = () => {
-    navigation.navigate('HomeScreen')
+    navigation.navigate('InitMoneySourceScreen')
   }
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
@@ -35,14 +35,14 @@ export default function AddDebtScreen() {
   return (
     <SafeAreaView>
       <PopupConfirm 
-          popupText={"Đã tạo khoản nợ"}
+          popupText={"Đã tạo nguồn tiền"}
           visible={popupVisible}
           onConfirm={() => popupNavigate()}
       />
       <View className="w-screen h-screen bg-white items-center justify-center px-[20] pt-[50] pb-[100]">
         <ScrollView className="w-full h-full bg-purple-50 px-4 py-4 rounded-2xl space-y-3">
           <View className="w-full flex-row space-x-3 items-center">
-            <Text className="flex-1 font-bold text-xl text-purple-900">Tạo khoản nợ mới</Text>  
+            <Text className="flex-1 font-bold text-xl text-purple-900">Tạo nguồn tiền mới</Text>  
           </View>
 
           <View className="w-full flex-row space-x-3 items-center">
@@ -52,7 +52,7 @@ export default function AddDebtScreen() {
             <View className="flex-1 justify-center border-2 rounded-xl px-2.5 py-2 border-purple-200">
               <TextInput
                 className="font-bold text-xl text-purple-900"
-                placeholder='Nhập tên khoản nợ'
+                placeholder='Nhập tên nguồn tiền'
                 value={defaultName}
                 onChangeText={setDefaultName}
               />

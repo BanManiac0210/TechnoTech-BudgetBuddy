@@ -3,7 +3,7 @@ import { Text, TouchableOpacity, View } from 'react-native';
 
 export default function LoginScreen( {navigation} ) {
   const navigateIntoAppTab = () => {
-    navigation.navigate('HomeScreen')
+    navigation.navigate('AppTab')
   }
 
   return (
@@ -11,6 +11,9 @@ export default function LoginScreen( {navigation} ) {
       <Text className="text-xl font-bold text-violet-900 p-[100]">Login Screen</Text>
       <TouchableOpacity className="px-[20] bg-blue-300 justify-center p-[10]" onPress={navigateIntoAppTab}>
         <Text className="text-xl font-bold text-violet-900">Go to HomeScreen</Text>
+      </TouchableOpacity>
+      <TouchableOpacity className="px-[20] bg-blue-300 justify-center p-[10]" onPress={() => navigation.navigate('InitMoneySourceScreen')}>
+        <Text className="text-xl font-bold text-violet-900">Go to Add Init Money Source Screen</Text>
       </TouchableOpacity>
     </View>
   );

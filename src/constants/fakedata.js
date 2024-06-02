@@ -1,11 +1,23 @@
-import MoneySource from "../components/MoneySource";
+// import MoneySource from "../components/MoneySource";
 
 const FDATA = {
-    currentBalance: 14200000,
+    currentBalance: 1000,
     incomeValue: 350000,
     expenseValue: 4500000,
     tagName: "Ăn uống",
     tagIconName: "cutlery",
+    colorList: [
+      {"color": "#D8BFD8"},
+      {"color": "#DDA0DD"},
+      {"color": "#EE82EE"},
+      {"color": "#DA70D6"},
+      {"color": "#BA55D3"},
+      {"color": "#9370DB"},
+      {"color": "#9932CC"},
+      {"color": "#9400D3"},
+      {"color": "#8A2BE2"},
+      {"color": "#800080"}
+    ],
     mainHistory: [
         {
           "sourceName": "Tiền mặt",

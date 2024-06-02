@@ -9,13 +9,6 @@ import HistoryCardMain from '../../components/HistoryCard/HistoryCardMain';
 import formattedValue from '../../components/formattedValue';
 
 export default function HomeScreen({navigation}) {
-  const formattedValue = ({value}) => {
-    return value.toLocaleString('vi-VN', {
-        style: 'currency',
-        currency: 'VND', // You can change the currency as needed
-        minimumFractionDigits: 0,
-    })
-  }
   const toMoneySource = () => {
     navigation.navigate('MoneySourceScreen')
   }
@@ -46,7 +39,7 @@ export default function HomeScreen({navigation}) {
         <View className="flex-1 items-center flex-col px-5">
           <Text className="font-bold text-2xl text-purple-900 text-start">Lịch sử</Text>
           <View className="w-full h-[2] bg-purple-900 my-1 opacity-10"></View>
-          <ScrollView className="w-full ">
+          <ScrollView className="w-full" contentContainerStyle={{paddingBottom: 120}} showsVerticalScrollIndicator={false}>
             {FDATA.mainHistory.map((item, index) => (
               <HistoryCardMain
                 key={index}

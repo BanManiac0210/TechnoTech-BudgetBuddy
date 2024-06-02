@@ -14,7 +14,7 @@ export default function MoneySourceScreen() {
           
         <ScrollView 
           className="flex-1 px-5 py-3 flex-col" 
-          contentContainerStyle={{paddingBottom: 80}} 
+          contentContainerStyle={{paddingBottom: 120}} 
           showsVerticalScrollIndicator={false}
         >
           <View className="flex-row mb-2">

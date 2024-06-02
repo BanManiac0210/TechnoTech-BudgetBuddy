@@ -231,6 +231,38 @@ const FDATA = {
       "tagIconName": "home",
       "tagColor": "#673AB7"
     }
+  ],
+  categoryList: [
+    {
+        "id": 1,
+        "tagIconName": "star",
+        "tagName": "Thức ăn",
+        "tagColor": "#800080"  // Purple color
+    },
+    {
+        "id": 2,
+        "tagIconName": "heart",
+        "tagName": "Mua sắm",
+        "tagColor": "#9370DB"  // Medium Purple color
+    },
+    {
+        "id": 3,
+        "tagIconName": "thumbs-up",
+        "tagName": "Giải trí",
+        "tagColor": "#8A2BE2"  // Blue Violet color
+    },
+    {
+        "id": 4,
+        "tagIconName": "car",
+        "tagName": "Giao thông",
+        "tagColor": "#9400D3"  // Dark Violet color
+    },
+    {
+        "id": 5,
+        "tagIconName": "home",
+        "tagName": "Tiện ích",
+        "tagColor": "#D8BFD8"  // Thistle color
+    }
   ]
 };
 

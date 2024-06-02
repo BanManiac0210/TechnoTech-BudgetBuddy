@@ -58,7 +58,7 @@ export default function Onboarding3() {
               className="flex-row space-x-2 justify-start items-center"
               onPress={() => navigation.navigate('LoginScreen')}
             >
-              <Text className="text-base text-purple-900" style={{lineHeight: 16}}>Tiếp</Text>
+              <Text className="text-base text-purple-900" style={{lineHeight: 16}}>Bắt đầu</Text>
               <Icon name="chevron-right" size={20} color={COLORS.purple_primary}/>
             </TouchableOpacity>
           </View>

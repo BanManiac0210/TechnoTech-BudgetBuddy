@@ -66,7 +66,7 @@ export default function AddInitMoneySourceScreen() {
           <View className="flex-1 justify-center items-center flex-row space-x-2">
             <TouchableOpacity
               className="h-[50] bg-slate-300 justify-center items-center py-2.5 px-5 rounded-lg"
-              onPress={() => navigation.navigate('AddScreen')}
+              onPress={() => navigation.navigate('InitMoneySourceScreen')}
             >
               <Text className="font-bold text-lg text-purple-900 leading-none">Hủy</Text>
             </TouchableOpacity>

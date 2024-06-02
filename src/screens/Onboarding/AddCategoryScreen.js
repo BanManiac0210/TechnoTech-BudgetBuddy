@@ -15,7 +15,6 @@ export default function AddCategoryScreen() {
   const [defaultName, setDefaultName] = useState('');
   const [defaultColor, setDefaultColor] = useState(tempColor);
   const [defaultIcon, setDefaultIcon] = useState(fakeIcon);
-  const [defaultBalance, setDefaultBalance] = useState(0);
 
   const [popupVisible, setPopupVisible] = useState(false);
   const openPopup = () => {

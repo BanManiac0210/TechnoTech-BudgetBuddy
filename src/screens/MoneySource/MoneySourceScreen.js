@@ -24,7 +24,6 @@ export default function MoneySourceScreen() {
           {FDATA.moneySources.map((item, index) => (
             <MoneySource
               key={index}
-              // Theem id
               iconType={item.iconType}
               moneySourceName={item.moneySourceName}
               balance={item.balance}

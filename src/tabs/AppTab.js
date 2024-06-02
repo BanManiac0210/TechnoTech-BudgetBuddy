@@ -4,6 +4,8 @@ import { Text, StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { COLORS } from "../constants/index.js"
+import { useState, View } from "react";
+import { BottomTabBar } from '@react-navigation/bottom-tabs';
 
 import Icon from "react-native-vector-icons/FontAwesome";
 import HomeStack from "../stacks/HomeStack";

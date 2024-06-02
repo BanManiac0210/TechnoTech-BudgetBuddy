@@ -5,7 +5,7 @@ import formattedValue from "../formattedValue.js";
 
 export default function HistoryCardMS({
     cateName,
-    cateIcon, 
+    cateIcon,
     cateColor,
     date,
     value,

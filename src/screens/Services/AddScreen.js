@@ -1,8 +1,6 @@
-import { StatusBar } from 'expo-status-bar';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { COLORS } from '../../constants';
 
 export default function AddScreen({navigation}) {
   const toAddIncome = () => {

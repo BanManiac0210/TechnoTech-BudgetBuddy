@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
-import { StatusBar } from 'expo-status-bar';
 import { Text, View, Switch, TouchableOpacity, Modal } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import SearchBar from '../../components/SearchBar';

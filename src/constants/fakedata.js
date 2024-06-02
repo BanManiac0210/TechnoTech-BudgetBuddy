@@ -6,18 +6,7 @@ const FDATA = {
     expenseValue: 4500000,
     tagName: "Ăn uống",
     tagIconName: "cutlery",
-    colorList: [
-      {"color": "#D8BFD8"},
-      {"color": "#DDA0DD"},
-      {"color": "#EE82EE"},
-      {"color": "#DA70D6"},
-      {"color": "#BA55D3"},
-      {"color": "#9370DB"},
-      {"color": "#9932CC"},
-      {"color": "#9400D3"},
-      {"color": "#8A2BE2"},
-      {"color": "#800080"}
-    ],
+    tagColor: "#9984CF",
     mainHistory: [
         {
           "sourceName": "Tiền mặt",
@@ -170,7 +159,79 @@ const FDATA = {
           "moneySourceName": "Sổ tiết kiệm",
           "balance": 10000000
         }
-    ]
+    ],
+    iconList: [
+      {"iconName": "glass"},
+      {"iconName": "music"},
+      {"iconName": "search"},
+      {"iconName": "envelope-o"},
+      {"iconName": "heart"},
+      {"iconName": "star"},
+      {"iconName": "user"},
+      {"iconName": "film"},
+      {"iconName": "th-large"},
+      {"iconName": "th"},
+      {"iconName": "check"},
+      {"iconName": "times"},
+      {"iconName": "search-plus"},
+      {"iconName": "search-minus"},
+      {"iconName": "cog"},
+      {"iconName": "home"},
+      {"iconName": "file-o"},
+      {"iconName": "lock"},
+      {"iconName": "flag"},
+      {"iconName": "camera"}
+  ],
+  colorList: [
+    {"color": "#D8BFD8"},
+    {"color": "#DDA0DD"},
+    {"color": "#EE82EE"},
+    {"color": "#DA70D6"},
+    {"color": "#BA55D3"},
+    {"color": "#9370DB"},
+    {"color": "#9932CC"},
+    {"color": "#9400D3"},
+    {"color": "#8A2BE2"},
+    {"color": "#800080"}
+  ],
+  tagList: [
+    {
+      "id": 1,
+      "tagName": "Salary",
+      "tagIconName": "money",
+      "tagColor": "#7E57C2"
+    },
+    {
+      "id": 2,
+      "tagName": "Freelance",
+      "tagIconName": "briefcase",
+      "tagColor": "#D1C4E9"
+    },
+    {
+      "id": 3,
+      "tagName": "Investments",
+      "tagIconName": "line-chart",
+      "tagColor": "#B39DDB"
+    },
+    {
+      "id": 4,
+      "tagName": "Gifts",
+      "tagIconName": "gift",
+      "tagColor": "#9575CD"
+    },
+    {
+      "id": 5,
+      "tagName": "Savings",
+      "tagIconName": "gift",
+      "tagColor": "#7E57C2"
+    },
+    {
+      "id": 6,
+      "tagName": "Rental Income",
+      "tagIconName": "home",
+      "tagColor": "#673AB7"
+    }
+  ]
 };
 
 export {FDATA}

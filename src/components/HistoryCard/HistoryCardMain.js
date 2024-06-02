@@ -1,25 +1,25 @@
 import React from "react";
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
-import { COLORS } from "../../constants";
-import CategoryTag from "../CategoryTag.js"
+import CategoryTag from "../Tags/CategoryTag.js";
 import formattedValue from "../formattedValue.js";
 
 export default function HistoryCardMain({
     sourceName,
     sourceIcon, 
+    sourceColor,
     cateName, 
     cateIcon, 
+    cateColor,
     date,
     value,
     description,
     type
 }) {
     return (
-        <View className="flex-col flex-1 p-2.5 bg-blue-100 rounded-lg mb-2.5">
-            <ScrollView className="flex-row  rounded-lg" horizontal={true} showsHorizontalScrollIndicator={false}>
-                <CategoryTag tagName={cateName} tagIconName={cateIcon}/>
-                <CategoryTag tagName={sourceName} tagIconName={sourceIcon}/>
+        <View className="flex-col flex-1 p-2.5 bg-blue-100 rounded-lg mb-2.5 border-gray-300 border-2">
+            <ScrollView className="flex-row rounded-lg" horizontal={true} showsHorizontalScrollIndicator={false}>
+                <CategoryTag tagName={cateName} tagIconName={cateIcon} tagColor={cateColor}/>
+                <CategoryTag tagName={sourceName} tagIconName={sourceIcon} tagColor={sourceColor}/>
                 <Text className="text-lg font-bold text-purple-600">| {date}</Text>
             </ScrollView>
             <Text className="italic font-bold text-lg text-blue-800">{description}</Text>

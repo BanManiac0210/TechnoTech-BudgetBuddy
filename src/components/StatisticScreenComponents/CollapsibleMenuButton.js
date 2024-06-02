@@ -5,6 +5,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { COLORS, FDATA } from "../../constants";
 import formattedValue from "../formattedValue";
 import BudgetExpense from './BudgetExpense';
+import { useNavigation } from '@react-navigation/native';
 
 export default function CollapsibleMenuButton ({iconType, moneySourceName, balance}) {
   const [collapsed, setCollapsed] = useState(true);
@@ -12,7 +13,8 @@ export default function CollapsibleMenuButton ({iconType, moneySourceName, balan
   const toggleExpanded = () => {
     setCollapsed(!collapsed);
   };
-
+  const navigation = useNavigation();
+  const condition = FDATA.currentBalance < 0; // Example condition
 return (
     
     <View className ="flex-col justify-start w-full space-x-3 rounded-lg mb-2.5 pt-2 pb-3 bg-blue-100">
@@ -21,6 +23,7 @@ return (
               <View className="flex-row items-start space-x-2 justify-start">
                 <Icon name={iconType} size={30} color={COLORS.purple_primary} />
                 <Text className="text-lg text-center font-bold text-violet-900">{moneySourceName}</Text>
+                {condition && <Icon name="star" size={20} color="red" style={{ marginLeft: -120 , marginTop: 4}} />}
               </View>
               <Text className="text-2xl text-center font-bold text-violet-900">{formattedValue({value:parseInt(balance)})}</Text>
               <Text className="text-lg text-center font-bold text-violet-900">Đã chi tiêu: </Text>
@@ -38,7 +41,7 @@ return (
                 balance={item.balance}
               />
         ))}
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => {navigation.navigate('AddBudgetScreen')}}>
           <View className="flex-row items-center justify-center w-full bg-blue-100 px-5 pt-2 pb-3 space-x-3 rounded-lg mb-2.5 border-gray-400 border-2 shadow-lg" style={{ 
             shadowColor: '#000', 
             shadowOffset: { width: 0, height: 2 }, 

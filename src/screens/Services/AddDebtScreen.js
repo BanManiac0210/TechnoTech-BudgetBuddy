@@ -23,7 +23,7 @@ export default function AddDebtScreen() {
     setPopupVisible(true)
   };
   const popupNavigate = () => {
-    navigation.navigate('HomeScreen')
+    navigation.navigate('AddScreen')
   }
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {

@@ -18,7 +18,7 @@ export default function AddTransferScreen() {
   };
   const popupNavigate = () => {
     //call api
-    navigation.navigate('HomeScreen')
+    navigation.navigate('AddScreen')
   }
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Dimensions } from 'react-native';
+import { View, Dimensions, StyleSheet } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 import { Text, ScrollView, TouchableOpacity } from 'react-native';
 import { useState } from 'react';
@@ -9,10 +9,7 @@ const ChartComponent = () => {
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0, visible: false, value: 0 });
   return (
     <View className = "w-full">
-      <View className="flex-row mb-2 ">
-        <Text className="flex-1 text-left">Thu nhập</Text>
-        <Text className="flex-1 text-right">Filter</Text>
-      </View>
+      
 
       <LineChart className="flex-1"
         data={{
@@ -59,6 +56,9 @@ const ChartComponent = () => {
         style={{
           marginVertical: 8,
           borderRadius: 16
+        }}
+        onDataPointClick={({ value, x, y }) => {
+          setTooltipPos({ x, y, visible: true, value });
         }}
       />
       {tooltipPos.visible && (

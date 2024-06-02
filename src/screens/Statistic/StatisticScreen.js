@@ -33,9 +33,9 @@ export default function MoneySourceScreen() {
           <View>
           <View className="flex-row mb-2">
             <Text className="font-bold flex-1 text-left text-xl text-purple-900">Ngân sách</Text> 
-            {condition && <Icon name="star" size={20} color="purple" style={{ marginLeft: -120 , marginTop: 4}} />}
+            {condition && <Icon name="star" size={20} color="red" style={{ marginLeft: -120 , marginTop: 4}} />}
             <TouchableOpacity className="font-bold flex-1 text-right text-xl text-purple-900">
-              <Text className="font-bold flex-1 text-right text-xl text-purple-900">Cài đặt ngân sách</Text> 
+              {/* <Text className="font-bold flex-1 text-right text-xl text-purple-900">Cài đặt ngân sách</Text>  */}
             </TouchableOpacity>
           </View>
           <View>
@@ -60,8 +60,23 @@ export default function MoneySourceScreen() {
           {/* CHART */}
           <View >
             <Text className="font-bold my-3 text-left text-xl text-purple-900">Biểu đồ trực quan</Text>
-          
-            <Chart/>
+            <View className="flex-col mb-2 ">
+              <View className="flex-1 flex-col mb-2 ">
+                <View className="flex-row mb-2 ">
+                  <Text className="flex-1 text-left">Thu nhập</Text>
+                  <Text className="flex-1 text-right">Filter</Text>
+                </View>
+                <Chart/>
+              </View>
+            
+              <View className="flex-1 flex-col mb-2 ">
+                <View className="flex-row mb-2 ">
+                  <Text className="flex-1 text-left">Chi tiêu</Text>
+                  <Text className="flex-1 text-right">Filter</Text>
+                </View>
+                <Chart/>
+              </View>
+            </View>
           </View>
           
 

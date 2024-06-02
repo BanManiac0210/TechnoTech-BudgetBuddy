@@ -6,6 +6,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import StatisticScreen from "../screens/Statistic/StatisticScreen";
 import AddBudgetScreen from "../screens/Statistic/AddBudgetScreen";
 import EditBudgetScreen from "../screens/Statistic/EditBudgetScreen";
+import BudgetDetailScreen from "../screens/Statistic/BudgetDetailScreen";
 
 const Stack = createStackNavigator();
 
@@ -25,6 +26,11 @@ export default function ReportStack() {
         <Stack.Screen
           name="EditBudgetScreen"
           component={EditBudgetScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="BudgetDetailScreen"
+          component={BudgetDetailScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

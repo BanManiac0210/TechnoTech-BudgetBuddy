@@ -25,7 +25,7 @@ export default function SettingScreen({ navigation }) {
     setPopupVisible(false)
   };
   const navigateToLogin = () => {
-    navigation.navigate('AuthStack', { screen: 'LoginScreen' });
+    navigation.navigate('AuthStack', { screen: 'Login' });
   }
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {

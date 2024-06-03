@@ -86,7 +86,10 @@ export default function MoneySourceEditScreen({moneySourceID}) {
           onConfirm={() => popupNavigate({screen:"MoneySourceScreen"})}
       />
       <View className="w-screen h-screen bg-white items-center justify-center px-[20] pt-[50] pb-[100]">
-        <ScrollView className="w-full h-full bg-purple-50 px-4 py-4 rounded-2xl space-y-3">
+        <ScrollView 
+          className="w-full h-full bg-purple-50 px-4 py-4 rounded-2xl space-y-3"
+          showsVerticalScrollIndicator={false}
+        >
           <View className="w-full flex-row space-x-3 items-center">
             <Text className="flex-1 font-bold text-xl text-purple-900">Chỉnh sửa nguồn tiền</Text>  
             <TouchableOpacity 

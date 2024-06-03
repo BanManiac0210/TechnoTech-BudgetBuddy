@@ -48,13 +48,13 @@ export default function Success() {
 
         {/* Success */}
         <View className="flex-col w-full justify-center items-center ">
-          <View className="pt-2">
+          <View className="pt-5">
             <Text className="font-bold text-3xl text-center text-purple-900">Đăng ký</Text>
-            <View className="flex-1 flex-col p-5 space-y-5 w-full justify-start items-center">
-              <Text>Bạn đã đăng ký thành công.</Text>
-              <Text>Vui lòng đăng nhập để sử dụng ứng dụng.</Text>
+            <View className="flex-1 flex-col p-5 space-y-1 w-full justify-start items-center">
+              <Text className="text-lg text-center text-purple-900 ">Bạn đã đăng ký thành công.</Text>
+              <Text className="text-lg text-center text-purple-900 ">Vui lòng đăng nhập để sử dụng ứng dụng.</Text>
               {/* BUTTON */}
-              <View className="w-[70%] flex-row space-x-5 items-center justify-start">
+              <View className="w-[70%] flex-row space-x-5 pt-5 items-center justify-start">
                 <TouchableOpacity 
                   className="w-[45%] h-10 bg-white border-2 border-purple-800 rounded-3xl justify-center items-center"
                   onPress={() => navigation.navigate('Login')}

@@ -66,7 +66,7 @@ export default function Sigup() {
               <View className="flex-1">
                 <Text 
                   style = {{zIndex: 10}}
-                  className="absolute -top-2 left-2 bg-white px-1 text-md text-gray-500"
+                  className="absolute -top-2 left-2 bg-white px-1 text-xs text-gray-500"
                   >Họ</Text>
                 <TextInput
                   className = "relative h-12 border-2 p-2 w-full border-purple-800 rounded-lg"
@@ -88,7 +88,7 @@ export default function Sigup() {
               <View className="flex-1">
                 <Text 
                     style = {{zIndex: 10}}
-                    className="absolute -top-2 left-2 bg-white px-1 text-md text-gray-500"
+                    className="absolute -top-2 left-2 bg-white px-1 text-xs text-gray-500"
                     >Tên</Text>
                 <TextInput
                   className = "relative h-12 border-2 p-2 w-full border-purple-800 rounded-lg"
@@ -111,7 +111,7 @@ export default function Sigup() {
             <View className="mb-9 w-[70%]">
               <Text 
                 style = {{zIndex: 10}}
-                className="absolute -top-2 left-2 bg-white px-1 text-md text-gray-500"
+                className="absolute -top-2 left-2 bg-white px-1 text-xs text-gray-500"
                 >Email</Text>
               <TextInput
                 className = "relative h-12 border-2 p-2 w-full border-purple-800 rounded-lg"
@@ -133,7 +133,7 @@ export default function Sigup() {
             <View className="mb-9 w-[70%]">
               <Text 
                 style = {{zIndex: 10}}
-                className="absolute -top-2 left-2 bg-white px-1 text-md text-gray-500"
+                className="absolute -top-2 left-2 bg-white px-1 text-xs text-gray-500"
                 >Tên đăng nhập</Text>
               <TextInput
                 className = "relative h-12 border-2 p-2 w-full border-purple-800 rounded-lg"
@@ -155,7 +155,7 @@ export default function Sigup() {
             <View className="mb-14 w-[70%]">
               <Text 
                 style = {{zIndex: 10}}
-                className="absolute -top-2 left-2 bg-white px-1 text-md text-gray-500"
+                className="absolute -top-2 left-2 bg-white px-1 text-xs text-gray-500"
                 >Mật khẩu</Text>
               <TextInput
                 className = "relative h-12 border-2 p-2 w-full border-purple-800 rounded-lg"
@@ -180,7 +180,7 @@ export default function Sigup() {
                 className="w-[45%] h-10 bg-white border-2 border-purple-800 rounded-3xl justify-center items-center"
                 onPress={() => navigation.navigate('Success')}
               >
-                <Text className="text-purple-800 text-md">Đăng ký</Text>
+                <Text className="text-purple-800 text-xs">Đăng ký</Text>
               </TouchableOpacity>
             </View>
 

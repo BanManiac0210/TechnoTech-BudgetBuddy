@@ -11,6 +11,7 @@ export default function Login() {
   const navigation = useNavigation()
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
   return (
       <View className="w-full h-full bg-white items-center justify-start">
         <ImageBackground
@@ -59,10 +60,10 @@ export default function Login() {
             <View className="mb-9  w-[70%]">
               <Text 
                 style = {{zIndex: 10}}
-                className="absolute -top-2 left-2 bg-white px-1 text-md text-gray-500"
+                className="absolute -top-2 left-2 bg-white px-1 text-xs text-gray-500"
                 >Tên đăng nhập</Text>
               <TextInput
-                className = "relative h-12 border-2 p-2 w-full border-purple-800 rounded-lg"
+                className = "relative h-12 border-2 py-2 px-3 w-full border-purple-800 rounded-lg"
                 value={username}
                 onChangeText={setUsername}
                 placeholder="Điền tên đăng nhập..."
@@ -72,7 +73,7 @@ export default function Login() {
                   style={{ position: 'absolute', right: 10, top: 14 }}
                   onPress={() => setUsername('')}
                 >
-                  <Icon name="star" size={20} color="gray" />
+                  <Icon name="times" size={20} color={COLORS.purple_primary} />
                 </TouchableOpacity>
               )}
             </View>
@@ -81,10 +82,10 @@ export default function Login() {
             <View className="mb-14 w-[70%]">
               <Text 
                 style = {{zIndex: 10}}
-                className="absolute -top-2 left-2 bg-white px-1 text-md text-gray-500"
+                className="absolute -top-2 left-2 bg-white px-1 text-xs text-gray-500"
                 >Mật khẩu</Text>
               <TextInput
-                className = "relative h-12 border-2 p-2 w-full border-purple-800 rounded-lg"
+                className = "relative h-12 border-2 py-2 px-3 w-full border-purple-800 rounded-lg"
                 value={password}
                 onChangeText={setPassword}
                 placeholder="Điền mật khẩu..."
@@ -95,7 +96,7 @@ export default function Login() {
                   style={{ position: 'absolute', right: 10, top: 14 }}
                   onPress={() => setPassword('')}
                 >
-                  <Icon name="star" size={20} color="gray" />
+                  <Icon name="times" size={20} color={COLORS.purple_primary} />
                 </TouchableOpacity>
               )}
             </View>
@@ -103,13 +104,14 @@ export default function Login() {
             <View className="w-[70%] flex-row space-x-5 items-center justify-center">
               <TouchableOpacity 
                 className="w-[45%] h-10 bg-purple-800 rounded-3xl justify-center items-center"
-                onPress={() => navigation.navigate('AppTab')}
+                onPress={() => navigation.navigate('InitMoneySourceScreen')} // 2 truong hop
+                // onPress={() => navigation.navigate('InitMoneySourceScreen')} // 2 truong hop
               >
                 <Text className="text-white text-md">Đăng nhập</Text>
               </TouchableOpacity>
               <TouchableOpacity 
                 className="w-[45%] h-10 bg-white border-2 border-purple-800 rounded-3xl justify-center items-center"
-                onPress={() => navigation.navigate('Sigup')}
+                onPress={() => navigation.navigate('Signup')}
               >
                 <Text className="text-purple-800 text-md">Đăng ký</Text>
               </TouchableOpacity>

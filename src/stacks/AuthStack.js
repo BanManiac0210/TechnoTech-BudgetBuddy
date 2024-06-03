@@ -9,6 +9,9 @@ import InitMoneySourceScreen from "../screens/Onboarding/InitMSScreen";
 import AddInitMoneySourceScreen from "../screens/Onboarding/AddInitMSScreen";
 import InitCategoryScreen from "../screens/Onboarding/InitCategoryScreen";
 import AddCategoryScreen from "../screens/Onboarding/AddCategoryScreen";
+import Login from "../screens/Authen/Login";
+import Signup from "../screens/Authen/Signup";
+import Success from "../screens/Authen/Success";
 
 const Stack = createStackNavigator();
 
@@ -35,6 +38,22 @@ export default function AuthStack() {
           component={LoginScreen}
           options={{ headerShown: false }}
         />
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Sigup"
+          component={Signup}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Success"
+          component={Success}
+          options={{ headerShown: false }}
+        />
+        
         <Stack.Screen
           name="InitMoneySourceScreen"
           component={InitMoneySourceScreen}

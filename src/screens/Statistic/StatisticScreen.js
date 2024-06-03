@@ -12,7 +12,7 @@ import Chart from '../../components/StatisticScreenComponents/Chart';
 import IncomeExpenseTag from '../../components/IncomeExpenseTag';
 
 
-export default function MoneySourceScreen() { 
+export default function StatisticScreen() { 
   const formattedValue = ({ value }) => {
     // Format the value as needed
     return value.toString();
@@ -31,20 +31,18 @@ export default function MoneySourceScreen() {
         >
           {/* BUDGET */}
           <View>
-          <View className="flex-row mb-2">
-            <Text className="font-bold flex-1 text-left text-xl text-purple-900">Ngân sách</Text> 
-            {condition && <Icon name="star" size={20} color="red" style={{ marginLeft: -120 , marginTop: 4}} />}
-            <TouchableOpacity className="font-bold flex-1 text-right text-xl text-purple-900">
-              {/* <Text className="font-bold flex-1 text-right text-xl text-purple-900">Cài đặt ngân sách</Text>  */}
-            </TouchableOpacity>
-          </View>
-          <View>
-          <CollapsibleMenuButton
-            iconType={FDATA.moneySources[0].iconType}
-            moneySourceName={FDATA.moneySources[0].moneySourceName}
-            balance={FDATA.currentBalance}
-          />
-          </View>
+            <View className="flex-row mb-2 items-start space-x-2 justify-start">
+              <Text className="font-bold text-left text-xl text-purple-900">Ngân sách</Text> 
+              {condition && <Icon name="star" size={20} color="red" style={{marginTop: 4}} />}
+              
+            </View>
+            <View>
+              <CollapsibleMenuButton
+                iconType={FDATA.moneySources[0].iconType}
+                moneySourceName={FDATA.moneySources[0].moneySourceName}
+                balance={FDATA.currentBalance}
+              />
+            </View>
           </View>
  
 

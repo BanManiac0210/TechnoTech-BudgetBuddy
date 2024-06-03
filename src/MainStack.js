@@ -11,17 +11,17 @@ const isLoggedIn = true; // Temp
 export default function MainStack() {
   return (
     <NavigationContainer>   
-      <Stack.Navigator initialRouteName={isLoggedIn? "AppTab" : "AuthStack"}>
-        <Stack.Screen 
-          name="AppTab" 
-          component={AppTab} 
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
+      <Stack.Navigator initialRouteName={isLoggedIn?  "AppTab" : "AuthStack"}>
+      <Stack.Screen
           name="AuthStack" 
           component={AuthStack} 
           options={{ headerShown: false }}
-        />
+      />
+      <Stack.Screen 
+        name="AppTab" 
+        component={AppTab} 
+        options={{ headerShown: false }}
+      />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -12,7 +12,7 @@ import Chart from '../../components/StatisticScreenComponents/Chart';
 import IncomeExpenseTag from '../../components/IncomeExpenseTag';
 
 
-export default function MoneySourceScreen() { 
+export default function StatisticScreen() { 
   const formattedValue = ({ value }) => {
     // Format the value as needed
     return value.toString();
@@ -63,7 +63,7 @@ export default function MoneySourceScreen() {
             <View className="flex-col mb-2 ">
               <View className="flex-1 flex-col mb-2 ">
                 <View className="flex-row mb-2 ">
-                  <Text className="flex-1 text-left">Thu nhập</Text>
+                  <Text className="flex-1 text-left font-bold text-lg text-purple-900">Thu nhập</Text>
                   <Text className="flex-1 text-right">Filter</Text>
                 </View>
                 <Chart/>
@@ -71,7 +71,7 @@ export default function MoneySourceScreen() {
             
               <View className="flex-1 flex-col mb-2 ">
                 <View className="flex-row mb-2 ">
-                  <Text className="flex-1 text-left">Chi tiêu</Text>
+                  <Text className="flex-1 text-left font-bold text-lg text-purple-900">Chi tiêu</Text>
                   <Text className="flex-1 text-right">Filter</Text>
                 </View>
                 <Chart/>

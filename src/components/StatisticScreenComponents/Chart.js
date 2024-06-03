@@ -10,7 +10,6 @@ const ChartComponent = () => {
   return (
     <View className = "w-full">
       
-
       <LineChart className="flex-1"
         data={{
           labels: ["Tuần 1", "Tuần 2", "Tuần 3", "Tuần 4"],

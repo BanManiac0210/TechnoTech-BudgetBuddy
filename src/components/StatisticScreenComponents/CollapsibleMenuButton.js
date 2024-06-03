@@ -51,7 +51,7 @@ return (
           }}>
             <View className="flex-row justify-center items-center">
                 <Icon name={iconType} size={30} color={COLORS.purple_primary} />
-                <Text className="text-sm text-center font-bold text-violet-900">Tạo ngân sách cho danh mục mới</Text>
+                <Text className="text-sm text-center ml-2 font-bold text-violet-900">Tạo ngân sách cho danh mục mới</Text>
             </View>
           </View>
         </TouchableOpacity>

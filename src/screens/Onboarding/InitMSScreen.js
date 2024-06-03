@@ -10,7 +10,7 @@ export default function InitMoneySourceScreen({moneySourceData}) {
   return (
     <View className="w-full h-full bg-white items-center justify-start">
         <ImageBackground
-          source={require('../../../assets/images/Onboarding/bg-onboarding1.png')}
+          source={require('../../../assets/images/Others/bg-category.png')}
           className="w-full h-[340] items-center justify-center"
           style={{}} 
           resizeMode='stretch'

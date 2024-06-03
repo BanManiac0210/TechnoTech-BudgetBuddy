@@ -12,7 +12,7 @@ import Chart from '../../components/StatisticScreenComponents/Chart';
 import IncomeExpenseTag from '../../components/IncomeExpenseTag';
 
 
-export default function MoneySourceScreen() { 
+export default function StatisticScreen() { 
   const formattedValue = ({ value }) => {
     // Format the value as needed
     return value.toString();

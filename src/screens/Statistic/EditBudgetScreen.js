@@ -72,7 +72,7 @@ export default function EditBudgetScreen({moneySourceID}) {
       <PopupConfirm 
           popupText={"Đã chỉnh sửa"}
           visible={popupModifiedVisible}
-          onConfirm={() => popupNavigate({screen:"MoneySourceDetailScreen"})}
+          onConfirm={() => popupNavigate({screen:"BudgetDetailScreen"})}
       />
       <View className="w-screen h-screen bg-white items-center justify-center px-[20] pt-[50] pb-[100]">
         <ScrollView className="w-full h-full bg-purple-50 px-4 py-4 rounded-2xl space-y-3">

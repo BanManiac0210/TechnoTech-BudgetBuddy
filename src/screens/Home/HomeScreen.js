@@ -13,7 +13,7 @@ export default function HomeScreen({ navigation }) {
     navigation.navigate("MoneySourceScreen");
   };
   const [balance, setBalance] = useState({});
-
+  console.log(process.env.API_BASE_URL);
   useEffect(() => {
     const fetchData = async () => {
       try {

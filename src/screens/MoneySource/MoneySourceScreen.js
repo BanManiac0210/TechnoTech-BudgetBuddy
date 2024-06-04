@@ -5,25 +5,29 @@ import { FDATA } from "../../constants";
 import MoneySource from "../../components/MoneySource";
 import formattedValue from "../../components/formattedValue";
 import { useEffect, useState } from "react";
-import { getBalanceAccount } from "../../services/userService";
+import {
+  getBalanceAccount,
+  getUserFromStorage,
+} from "../../services/userService";
+
 import { getMoneySourceByType } from "../../services/moneySourceService";
 export default function MoneySourceScreen() {
   const [balance, setBalance] = useState({});
   const [moneySources, setMoneySources] = useState([]);
   const [savings, setSavings] = useState([]);
   const [debts, setDebts] = useState([]);
-  const [userId, setUserId] = useState("665dcbf114bc7da8c41eddf3");
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const balance = await getBalanceAccount(userId);
+        const user = await getUserFromStorage();
+        const balance = await getBalanceAccount(user._id);
         setBalance(balance);
-        const data = await getMoneySourceByType(userId);
+        const data = await getMoneySourceByType(user._id);
         setMoneySources(data?.moneySources);
         setSavings(data?.savings);
         setDebts(data?.debts);
       } catch (error) {
-        console.log("Failed to fetch data: ", error);
+        console.log("Failed to fetch data from Money Source Screen ", error);
       }
     };
     fetchData();

@@ -13,6 +13,7 @@ import { COLORS } from "../../constants";
 import { useState } from "react";
 import { TextInput } from "react-native-gesture-handler";
 import axios from "axios";
+import { loginAccount, setUserToStorage } from "../../services/userService";
 
 export default function Login() {
   const navigation = useNavigation();
@@ -26,13 +27,14 @@ export default function Login() {
     }
 
     try {
-      const response = await axios.post("https://example.com/api/login", {
-        username,
-        password,
-      });
-      // Handle successful login, e.g., navigate to the main app screen
-      Alert.alert("Success", "Login successful");
-      navigation.navigate("AppTab");
+      const response = await loginAccount(username, password);
+      if (response && response._id) {
+        Alert.alert("Success", "Login successful");
+        await setUserToStorage(response);
+        navigation.navigate("AppTab");
+      } else {
+        Alert.alert("Error", "Login failed");
+      }
     } catch (error) {
       // Handle login error, e.g., show an error message
       Alert.alert("Error", "Login failed");

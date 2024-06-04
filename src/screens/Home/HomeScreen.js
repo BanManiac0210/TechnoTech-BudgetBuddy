@@ -7,18 +7,32 @@ import IncomeExpenseTag from "../../components/IncomeExpenseTag";
 import HistoryCardMain from "../../components/HistoryCard/HistoryCardMain";
 import formattedValue from "../../components/formattedValue";
 import { useEffect, useState } from "react";
-import { getBalanceAccount } from "../../services/userService";
+import {
+  getBalanceAccount,
+  getUserFromStorage,
+} from "../../services/userService";
+import { getLogByMonth } from "../../services/logService";
+import MoneySource from "../../components/MoneySource";
 export default function HomeScreen({ navigation }) {
   const toMoneySource = () => {
     navigation.navigate("MoneySourceScreen");
   };
   const [balance, setBalance] = useState({});
-  console.log(process.env.API_BASE_URL);
+  const [history, setHistory] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const balance = await getBalanceAccount("665dcbf114bc7da8c41eddf3");
+        const user = await getUserFromStorage();
+        const balance = await getBalanceAccount(user._id);
         setBalance(balance);
+        const date = new Date();
+        const history = await getLogByMonth(
+          date.getMonth() + 1,
+          date.getFullYear(),
+          user._id
+        );
+
+        setHistory(history);
       } catch (error) {
         console.log("Failed to fetch data: ", error);
       }
@@ -65,21 +79,22 @@ export default function HomeScreen({ navigation }) {
             contentContainerStyle={{ paddingBottom: 80 }}
             showsVerticalScrollIndicator={false}
           >
-            {FDATA.mainHistory.map((item, index) => (
-              <HistoryCardMain
-                key={index}
-                sourceName={item.sourceName}
-                sourceIcon={item.sourceIcon}
-                sourceColor={FDATA.tagColor}
-                cateName={item.cateName}
-                cateIcon={item.cateIcon}
-                cateColor={FDATA.tagColor}
-                date={item.date}
-                value={item.value}
-                description={item.description}
-                type={item.type}
-              />
-            ))}
+            {history.length > 0 &&
+              history.map((item, index) => (
+                <HistoryCardMain
+                  key={index}
+                  sourceName={item.moneySource[0].name}
+                  sourceIcon={"money"}
+                  sourceColor={"#9984CF"}
+                  cateName={item.tag[0].name}
+                  cateIcon={item.cateIcon}
+                  cateColor={"#9984CF"}
+                  date={item.createdAt}
+                  value={item.moneyValue}
+                  description={item.description}
+                  type={item.type}
+                />
+              ))}
           </ScrollView>
         </View>
       </View>

@@ -11,7 +11,6 @@ import { useEffect, useState } from "react";
 export default function MoneySourceDetailScreen({ moneySourceID }) {
   const [detail, setBalance] = useState({});
   const [userId, setUserId] = useState("665dcbf114bc7da8c41eddf3");
-  console.log("idddd", moneySourceID);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -22,7 +21,7 @@ export default function MoneySourceDetailScreen({ moneySourceID }) {
       }
     };
     fetchData();
-  }, []);
+  }, [moneySourceID]);
   const navigation = useNavigation();
   return (
     <SafeAreaView>

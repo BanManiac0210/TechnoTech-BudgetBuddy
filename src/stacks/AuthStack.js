@@ -44,7 +44,7 @@ export default function AuthStack() {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="Sigup"
+          name="Signup"
           component={Signup}
           options={{ headerShown: false }}
         />

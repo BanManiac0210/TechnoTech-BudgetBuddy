@@ -12,14 +12,13 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { COLORS } from "../../constants";
 import { useState } from "react";
 import { TextInput } from "react-native-gesture-handler";
-import axios from "axios";
 import { loginAccount, setUserToStorage } from "../../services/userService";
+import { getTagsByID, getTagsByUser } from "../../services/tagService";
 
 export default function Login() {
   const navigation = useNavigation();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
   const handleLogin = async () => {
     if (username.trim() === "" || password.trim() === "") {
       Alert.alert("Error", "Please fill in all fields");
@@ -31,13 +30,20 @@ export default function Login() {
       if (response && response._id) {
         Alert.alert("Success", "Login successful");
         await setUserToStorage(response);
-        navigation.navigate("AppTab");
+        console.log(response._id);
+        const cateArr = await getTagsByUser(response._id);
+        if (cateArr.length > 0) {
+          navigation.navigate("AppTab");
+        }
+        else {
+          navigation.navigate("InitMoneySourceScreen");
+        }
       } else {
         Alert.alert("Error", "Login failed");
       }
     } catch (error) {
       // Handle login error, e.g., show an error message
-      Alert.alert("Error", "Login failed");
+      console.log("Error Login: ", error)
     }
   };
 
@@ -119,7 +125,7 @@ export default function Login() {
                 style={{ position: "absolute", right: 10, top: 14 }}
                 onPress={() => setUsername("")}
               >
-                <Icon name="star" size={20} color="gray" />
+                <Icon name="trash" size={20} color="gray" />
               </TouchableOpacity>
             )}
           </View>
@@ -144,7 +150,7 @@ export default function Login() {
                 style={{ position: "absolute", right: 10, top: 14 }}
                 onPress={() => setPassword("")}
               >
-                <Icon name="star" size={20} color="gray" />
+                <Icon name="trash" size={20} color="gray" />
               </TouchableOpacity>
             )}
           </View>

@@ -11,13 +11,36 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import Chart from "../../components/StatisticScreenComponents/Chart";
 import IncomeExpenseTag from "../../components/IncomeExpenseTag";
 import { logType } from "../../utils/typeEnum";
+import { useState, useEffect } from "react";
+import { getUserFromStorage } from "../../services/userService";
+import { chartTypeByMonth } from "../../services/logService";
 
-export default function StatisticScreen() {
-  const formattedValue = ({ value }) => {
-    // Format the value as needed
-    return value.toString();
-  };
+export default function StatisticScreen() { 
+  const [incomeValue, setIncome] = useState(0) //
+  const [expenseValue, setExpense] = useState(0) //
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const user = await getUserFromStorage(); 
+        const date = new Date();
+        const month = date.getMonth() + 1;
+        const year = date.getFullYear();
+        const dataThu = await chartTypeByMonth(month, year, "thu", user._id);
+        const incomeVal = dataThu.reduce((x, y) => {return x + y})
+        const dataChi = await chartTypeByMonth(month, year, "chi", user._id);
+        const expenseVal = dataChi.reduce((x, y) => {return x + y})
+        setIncome(incomeVal);
+        setExpense(expenseVal)
+
+
+      } catch (error) {
+        console.log("Failed to fetch data: ", error);
+      }
+    };
+    fetchData();
+  }, []);
+  
   const condition = FDATA.currentBalance < 0; // Example condition
   return (
     <SafeAreaView>
@@ -59,8 +82,8 @@ export default function StatisticScreen() {
               Báo cáo
             </Text>
             <IncomeExpenseTag
-              incomeValue={FDATA.incomeValue}
-              expenseValue={FDATA.expenseValue}
+              incomeValue={incomeValue}
+              expenseValue={expenseValue}
             />
           </View>
 

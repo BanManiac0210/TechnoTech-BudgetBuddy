@@ -1,4 +1,4 @@
-import { ScrollView, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import { Alert, ScrollView, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useState, useEffect } from 'react';
 import { FDATA } from '../../constants';
@@ -6,23 +6,83 @@ import { useNavigation } from '@react-navigation/native';
 import CustomNumpad from '../../components/CustomNumpad';
 import PopupConfirm from '../../components/Popups/PopupConfirm';
 import TagPicker from '../../components/Tags/TagPicker';
+import { getTagsByUser } from '../../services/tagService';
+import { getUserFromStorage } from '../../services/userService';
+import { getMoneySourceByType } from '../../services/moneySourceService';
+import { insertLogs } from '../../services/logService';
 
 export default function AddIncomeScreen() {
   const navigation = useNavigation();
   const [defaultName, setDefaultName] = useState('');
   const [defaultBalance, setDefaultBalance] = useState(0);
+  const [moneySourceId, setMoneySourceId] = useState('')
+  const [categoryId, setCategoryId] = useState('')
+  const [cateList, setCateList] = useState([])
+  const [moneySourceList, setMoneySourceList] = useState([])
+  const [userID, setUserID] = useState("")
+
 
   const [popupVisible, setPopupVisible] = useState(false);
   const openPopup = () => {
-    setPopupVisible(true)
+    if (moneySourceId == '' || categoryId == '') {
+      Alert.alert("Lỗi!", "Hãy chọn đầy đủ các trường")
+      return
+    }
+    else {
+      const createNewExpense = async () => {
+        try {
+          const data = {
+            type: "thu",
+            MoneySourceId: moneySourceId,
+            moneyValue: defaultBalance,
+            TagId: categoryId,
+            userId: userID,
+            createdAt: new Date(),
+            description: defaultName
+          }
+          const respond = await insertLogs(data)
+        }
+        catch (error) {
+          console.log("Error in AddExpenseScreen: ", error)
+        }
+      }
+      createNewExpense();
+      setPopupVisible(true)
+    }
   };
   const popupNavigate = () => {
+    //call api
     navigation.navigate('AddScreen')
   }
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       setPopupVisible(false)
     });
+
+    const fetchData = async () => {
+      try{
+        const user = await getUserFromStorage();
+        setUserID(user._id)
+        const tagData = await getTagsByUser(user._id)
+        const tagDatamini = tagData.map(item => ({ _id: item._id, name: item.name }));
+        const moneyTemp = await getMoneySourceByType(user._id)
+        const moneyTemp2 = moneyTemp.moneySources.concat(moneyTemp.savings, moneyTemp.debts)
+        const moneysub = moneyTemp2.map(item => ({ _id: item._id, name: item.name }))
+
+        const moneyTags = moneyTemp.moneySources.map((item => ({ _id: item._id, name: item.name })))
+        const cateTags = tagDatamini.filter(item1 => !moneysub.some(item2 => item2.name == item1.name));
+
+        setMoneySourceList(moneyTags)
+        setCateList(cateTags)
+
+      }
+      catch (error) {
+        console.log("Failed to fetch data on AddSavingScreen: ", error);
+      } 
+    }
+
+    fetchData();
+
     return unsubscribe;
   }, [navigation]);
 
@@ -56,8 +116,8 @@ export default function AddIncomeScreen() {
             </View>
           </View>
 
-          <TagPicker tagInfo="Chọn nguồn tiền" tagData={FDATA.tagList}/>
-          <TagPicker tagInfo="Chọn danh mục" tagData={FDATA.tagList}/>
+          <TagPicker tagInfo="Chọn danh mục" tagData={cateList} setTagId={setCategoryId} type="MS"/>
+          <TagPicker tagInfo="Chọn nguồn tiền" tagData={moneySourceList} setTagId={setMoneySourceId} type="CT"/>
           <CustomNumpad initValue={defaultBalance} updateValue={setDefaultBalance}/>
 
           <View className="flex-1 justify-center items-center flex-row space-x-2">

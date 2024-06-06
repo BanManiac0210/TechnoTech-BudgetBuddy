@@ -7,22 +7,36 @@ import formattedValue from "../../components/formattedValue";
 import IncomeExpenseTag from "../../components/IncomeExpenseTag";
 import HistoryCardMS from "../../components/HistoryCard/HistoryCardMS";
 import { getDetailMoneySourceById } from "../../services/moneySourceService";
+import { getUserFromStorage } from "../../services/userService";
 import { useEffect, useState } from "react";
-export default function MoneySourceDetailScreen({ moneySourceID }) {
-  const [detail, setBalance] = useState({});
-  const [userId, setUserId] = useState("665dcbf114bc7da8c41eddf3");
+export default function MoneySourceDetailScreen({ route, navigation}) {
+  const {moneySourceID} = route.params;
+  const [currentBalance, setBalance] = useState(0) //
+  const [incomeValue, setIncome] = useState(0) //
+  const [expenseValue, setExpense] = useState(0) //
+  const [moneySourceName, setDefaultName] = useState("");
+  const [moneySourceColor, setDefaultColor] = useState("");
+  const [moneySourceIcon, setDefaultIcon] = useState("");
+  const [historyLogs, setHistory] = useState([])
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const detail = await getDetailMoneySourceById(moneySourceID, userId);
-        setBalance(detail);
+        const user = await getUserFromStorage();
+        const detail = await getDetailMoneySourceById(moneySourceID, user._id);
+        setBalance(detail.moneySource.Budget)
+        setIncome(detail.logs.incomeValue)
+        setExpense(detail.logs.expenseValue)
+        setDefaultName(detail.moneySource.name)
+        setDefaultColor(detail.moneySource.TagId.colorId.code)
+        setDefaultIcon(detail.moneySource.TagId.iconId.url)
+        setHistory(detail.logs.logHistory)
       } catch (error) {
-        console.log("Failed to fetch data: ", error);
+        console.log("Failed to fetch data from MoneySourceDetailScreen: ", error);
       }
     };
     fetchData();
-  }, [moneySourceID]);
-  const navigation = useNavigation();
+  }, [navigation]);
   return (
     <SafeAreaView>
       <View className="w-screen h-screen bg-white items-center justify-center px-[20] pt-[50] pb-[100]">
@@ -30,7 +44,9 @@ export default function MoneySourceDetailScreen({ moneySourceID }) {
           <View className="flex-row w-full space-x-3 items-center">
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate("MoneySourceScreen");
+                navigation.navigate("MoneySourceScreen", {
+                  moneySourceID: moneySourceID
+                });
               }}
             >
               <Icon
@@ -39,16 +55,18 @@ export default function MoneySourceDetailScreen({ moneySourceID }) {
                 color={COLORS.purple_primary}
               />
             </TouchableOpacity>
-            <View className="h-[30] w-[30] justify-center items-center rounded-full bg-purple-300">
-              <Icon name="money" size={15} color="white" />
+            <View className="h-[30] w-[30] justify-center items-center rounded-full" style={{backgroundColor: moneySourceColor}}>
+              <Icon name={moneySourceIcon} size={15} color="white" />
             </View>
             <Text className="font-bold text-2xl text-purple-900 flex-1">
-              Nguon tien
+              {moneySourceName}
             </Text>
             <TouchableOpacity
               className="items-end"
               onPress={() => {
-                navigation.navigate("MoneySourceEditScreen");
+                navigation.navigate("MoneySourceEditScreen", {
+                  moneySourceID: moneySourceID
+                });
               }}
             >
               <Icon name="pencil" size={30} color={COLORS.purple_primary} />
@@ -57,11 +75,11 @@ export default function MoneySourceDetailScreen({ moneySourceID }) {
 
           <View className="p-3">
             <Text className="font-bold text-center text-4xl text-purple-900">
-              {formattedValue({ value: parseInt("90") })}
+              {formattedValue({ value: currentBalance})}
             </Text>
           </View>
 
-          <IncomeExpenseTag incomeValue={123123} expenseValue={123123} />
+          <IncomeExpenseTag incomeValue={incomeValue} expenseValue={expenseValue} />
 
           <View className="flex-1 items-center flex-col">
             <Text className="font-bold text-xl text-purple-900 text-start">
@@ -69,16 +87,16 @@ export default function MoneySourceDetailScreen({ moneySourceID }) {
             </Text>
             <View className="w-full h-[2] bg-purple-900 my-1 opacity-10"></View>
             <ScrollView className="w-full" showsVerticalScrollIndicator={false}>
-              {FDATA.mainHistory.map((item, index) => (
+              {historyLogs.length > 0 && historyLogs.map((item, index) => (
                 <HistoryCardMS
                   key={index}
-                  cateName={item.cateName}
-                  cateIcon={item.cateIcon}
-                  cateColor={FDATA.tagColor}
-                  date={item.date}
-                  value={item.value}
+                  cateName={item.TagId.name}
+                  cateIcon={item.TagId.iconId.url}
+                  cateColor={item.TagId.colorId.code}
+                  date={item.createdAt}
+                  value={item.moneyValue}
                   description={item.description}
-                  type={item.type}
+                  type={item.type == "thu" ? "Thu nhập" : "Chi tiêu"}
                 />
               ))}
             </ScrollView>

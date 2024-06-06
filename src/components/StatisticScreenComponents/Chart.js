@@ -10,7 +10,7 @@ import { LineChart } from "react-native-chart-kit";
 import { useState, useEffect } from "react";
 import Tooltip from "./Tooltip";
 
-import { chartTypeByMonth } from "../../services/logService";
+import { chartTypeByMonth, getLogsByID } from "../../services/logService";
 import { getUserFromStorage } from "../../services/userService";
 const ChartComponent = ({ type }) => {
   const [tooltipPos, setTooltipPos] = useState({
@@ -34,6 +34,7 @@ const ChartComponent = ({ type }) => {
         const year = date.getFullYear();
         const user = await getUserFromStorage();
         const data = await chartTypeByMonth(month, year, type, user._id);
+        
         setData(data);
         console.log("data1", data);
       } catch (error) {
@@ -55,14 +56,15 @@ const ChartComponent = ({ type }) => {
             labels: ["Tuần 1", "Tuần 2", "Tuần 3", "Tuần 4"],
             datasets: [
               {
-                data: data,
+                // data: data,
+                data: [2, 4, 8, 18],
                 strokeWidth: 4, // Increase the line weight
               },
             ],
           }}
           width={Dimensions.get("window").width} // from react-native
           height={220}
-          yAxisLabel="$"
+          // yAxisLabel="$"
           yAxisSuffix="k"
           yAxisInterval={1} // optional, defaults to 1
           chartConfig={{

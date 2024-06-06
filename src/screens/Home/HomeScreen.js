@@ -2,43 +2,46 @@ import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import SearchBar from "../../components/SearchBar";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { COLORS, FDATA } from "../../constants";
+import { COLORS} from "../../constants";
 import IncomeExpenseTag from "../../components/IncomeExpenseTag";
 import HistoryCardMain from "../../components/HistoryCard/HistoryCardMain";
 import formattedValue from "../../components/formattedValue";
 import { useEffect, useState } from "react";
-import {
-  getBalanceAccount,
-  getUserFromStorage,
-} from "../../services/userService";
-import { getLogByMonth } from "../../services/logService";
-import MoneySource from "../../components/MoneySource";
+import { getUserFromStorage} from "../../services/userService";
+import { getLogsByID, chartTypeByMonth } from "../../services/logService";
 export default function HomeScreen({ navigation }) {
   const toMoneySource = () => {
     navigation.navigate("MoneySourceScreen");
   };
-  const [balance, setBalance] = useState({});
+  const [currentBalance, setBalance] = useState(0) //
+  const [incomeValue, setIncome] = useState(0) //
+  const [expenseValue, setExpense] = useState(0) //
   const [history, setHistory] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const user = await getUserFromStorage();
-        const balance = await getBalanceAccount(user._id);
-        setBalance(balance);
+        const user = await getUserFromStorage(); 
+        setBalance(user.totalMoney)
+        const userLog = await getLogsByID(user._id)
+        setHistory(userLog)
+        
         const date = new Date();
-        const history = await getLogByMonth(
-          date.getMonth() + 1,
-          date.getFullYear(),
-          user._id
-        );
+        const month = date.getMonth() + 1;
+        const year = date.getFullYear();
+        const dataThu = await chartTypeByMonth(month, year, "thu", user._id);
+        const incomeVal = dataThu.reduce((x, y) => {return x + y})
+        const dataChi = await chartTypeByMonth(month, year, "chi", user._id);
+        const expenseVal = dataChi.reduce((x, y) => {return x + y})
+        setIncome(incomeVal);
+        setExpense(expenseVal)
 
-        setHistory(history);
+
       } catch (error) {
         console.log("Failed to fetch data: ", error);
       }
     };
     fetchData();
-  }, []);
+  }, [navigation]);
   return (
     <SafeAreaView>
       <View className="flex-col bg-white w-screen h-screen p-2.5 space-y-1">
@@ -53,7 +56,7 @@ export default function HomeScreen({ navigation }) {
                 </Text>
               </View>
               <Text className="text-4xl text-center font-bold text-violet-900">
-                {formattedValue({ value: parseInt(balance.currentBalance) })}
+                {formattedValue({ value: currentBalance })}
               </Text>
             </View>
             <View className="justify-center items-end flex-1">
@@ -64,8 +67,8 @@ export default function HomeScreen({ navigation }) {
           </View>
 
           <IncomeExpenseTag
-            incomeValue={balance.incomeValue}
-            expenseValue={balance.expenseValue}
+            incomeValue={incomeValue}
+            expenseValue={expenseValue}
           />
         </View>
 
@@ -83,16 +86,16 @@ export default function HomeScreen({ navigation }) {
               history.map((item, index) => (
                 <HistoryCardMain
                   key={index}
-                  sourceName={item.moneySource[0].name}
-                  sourceIcon={"money"}
-                  sourceColor={"#9984CF"}
-                  cateName={item.tag[0].name}
-                  cateIcon={item.cateIcon}
-                  cateColor={"#9984CF"}
+                  sourceName={item.MoneySourceId.name}
+                  sourceIcon={item.MoneySourceId.TagId.iconId.url}
+                  sourceColor={item.MoneySourceId.TagId.colorId.code}
+                  cateName={item.TagId.name}
+                  cateIcon={item.TagId.iconId.url}
+                  cateColor={item.TagId.colorId.code}
                   date={item.createdAt}
                   value={item.moneyValue}
                   description={item.description}
-                  type={item.type}
+                  type={item.type == "thu" ? "Thu nhập" : "Chi tiêu"}
                 />
               ))}
           </ScrollView>

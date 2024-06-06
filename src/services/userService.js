@@ -37,7 +37,7 @@ const getUserFromStorage = async () => {
   }
 };
 const setUserToStorage = async (user) => {
-  console.log("user", user);
+  // console.log("user", user);
   const userDataString = JSON.stringify(user);
   await AsyncStorage.setItem("User", userDataString);
 };

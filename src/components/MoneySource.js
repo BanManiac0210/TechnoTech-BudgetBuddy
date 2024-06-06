@@ -29,7 +29,7 @@ export default function MoneySource({
         <TouchableOpacity
           onPress={() => {
             navigation.navigate("MoneySourceDetailScreen", {
-              moneySourceID: { moneySourceID },
+              moneySourceID: moneySourceID,
             });
           }}
         >

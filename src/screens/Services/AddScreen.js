@@ -1,4 +1,4 @@
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -10,7 +10,8 @@ export default function AddScreen({navigation}) {
     navigation.navigate('AddExpenseScreen')
   }
   const toAddTransfer = () => {
-    navigation.navigate('AddTransferScreen')
+    // navigation.navigate('AddTransferScreen')
+    Alert.alert("Lỗi", "Tính năng này chưa được hỗ trợ.");
   }
   const toAddMoneySource = () => {
     navigation.navigate('AddMoneySourceScreen')

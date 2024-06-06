@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
-import { Text, View, Switch, TouchableOpacity, Modal } from 'react-native';
+import { Text, View, Switch, TouchableOpacity, Modal, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import SearchBar from '../../components/SearchBar';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -16,6 +16,9 @@ export default function SettingScreen({ navigation }) {
   const [isEnableBudget, setStateBudget] = useState(false)
   const toggleBudgetSwitch = () => setStateBudget(previousState => !previousState)
   const [isPopupVisible, setPopupVisible] = useState(false);
+  const showAlert = () => {
+    Alert.alert("Lỗi", "Tính năng này chưa được hỗ trợ.");
+  }
   const openPopup = () => {
     console.log("Opening popup");
     setPopupVisible(true)
@@ -103,14 +106,14 @@ export default function SettingScreen({ navigation }) {
             </View>
             <View className="flex-row h-[60] w-[330] bg-slate-100 rounded-xl items-center px-3"> 
               <Text className="text-xl font-bold text-purple-900 ml-0 flex-1">Xuất file CSV</Text>
-              <TouchableOpacity className="items-center space-x-2 h-[40] flex-row p-2 bg-blue-200 rounded">
+              <TouchableOpacity className="items-center space-x-2 h-[40] flex-row p-2 bg-blue-200 rounded" onPress={showAlert}>
                 <Icon name="download" size={25} color={COLORS.purple_primary} />
                 <Text className="font-bold text-xl text-purple-900">Tải</Text>
               </TouchableOpacity>
             </View>
             <View className="flex-row h-[60] w-[330] bg-slate-100 rounded-xl items-center px-3"> 
               <Text className="text-xl font-bold text-purple-900 ml-0 flex-1">Nhập file CSV</Text>
-              <TouchableOpacity className="items-center space-x-2 h-[40] flex-row p-2 bg-blue-200 rounded">
+              <TouchableOpacity className="items-center space-x-2 h-[40] flex-row p-2 bg-blue-200 rounded" onPress={showAlert}>
                 <Icon name="upload" size={25} color={COLORS.purple_primary} />
                 <Text className="font-bold text-xl text-purple-900">Tải</Text>
               </TouchableOpacity>
@@ -119,7 +122,7 @@ export default function SettingScreen({ navigation }) {
               <Text className="text-xl font-bold text-purple-900 ml-0">Xóa dữ liệu</Text>
               <Icon name="exclamation-circle" size={25} color={COLORS.red} />
               <View className="flex-1"></View>
-              <TouchableOpacity className="items-center space-x-2 h-[40] flex-row p-2 bg-red-600 rounded">
+              <TouchableOpacity className="items-center space-x-2 h-[40] flex-row p-2 bg-red-600 rounded" onPress={showAlert}>
                 <Icon name="exclamation-circle" size={25} color="white" />
                 <Text className="font-bold text-xl text-white">Xóa</Text>
               </TouchableOpacity>

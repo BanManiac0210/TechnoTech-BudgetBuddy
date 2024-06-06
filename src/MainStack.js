@@ -6,7 +6,7 @@ import AppTab from "./tabs/AppTab";
 
 const Stack = createStackNavigator();
 
-const isLoggedIn = true; // Temp
+const isLoggedIn = false; // Temp
 
 export default function MainStack() {
   return (

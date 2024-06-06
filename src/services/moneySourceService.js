@@ -19,7 +19,7 @@ const getMoneySourceByType = async (userId) => {
 
 const getDetailMoneySourceById = async (id, userId) => {
   return await axiosClient.get(
-    `moneySources/detail?userId=${userId}?moneySourceId=${id}`
+    `moneySources/detail?userId=${userId}&moneySourceId=${id}`
   );
 };
 

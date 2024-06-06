@@ -9,18 +9,49 @@ import ColorPicker from '../../components/Picker/ColorPicker';
 import CustomNumpad from '../../components/CustomNumpad';
 import PopupAsk from '../../components/Popups/PopupAsk';
 import PopupConfirm from '../../components/Popups/PopupConfirm';
+import { getUserFromStorage } from '../../services/userService';
+import { getDetailMoneySourceById, updateMoneySource } from '../../services/moneySourceService';
+import { getColors, getIcons } from '../../services/componentService';
+import { updateTag } from '../../services/tagService';
 
-export default function MoneySourceEditScreen({moneySourceID}) {
-  const navigation = useNavigation();
-  var fakeMSName = "MB Bank"
-  var tempColor = "#DA70D6";
-  var fakeIcon = "money";
-  var fakeBalance = 1420000;
-  const [defaultName, setDefaultName] = useState(fakeMSName);
-  const [defaultColor, setDefaultColor] = useState(tempColor);
-  const [defaultIcon, setDefaultIcon] = useState(fakeIcon);
-  const [defaultBalance, setDefaultBalance] = useState(fakeBalance);
+export default function MoneySourceEditScreen({route, navigation}) {
+  const {moneySourceID} = route.params;
+  const [defaultName, setDefaultName] = useState("Nguồn tiền");
+  const [defaultColor, setDefaultColor] = useState("#DA70D6");
+  const [defaultIcon, setDefaultIcon] = useState("money");
+  const [defaultBalance, setBalance] = useState(0);
 
+  const [colorList, setColorList] = useState([]);
+  const [defaultColorId, setDefaultColorId] = useState("");
+
+  const [iconList, setIconList] = useState([]);
+  const [defaultIconId, setDefaultIconId] = useState("");
+
+  const [tagId, setTagId] = useState("")
+  const [userID, setUserID] = useState("")
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const user = await getUserFromStorage();
+        setUserID(user._id)
+        const data = await getDetailMoneySourceById(moneySourceID, user._id);
+        const colorArr = await getColors();
+        setColorList(colorArr)
+        const iconArr = await getIcons();
+        setIconList(iconArr)
+        setTagId(data.moneySource.TagId._id)
+        setBalance(data.moneySource.Budget)
+        setDefaultName(data.moneySource.name)
+        setDefaultColor(data.moneySource.TagId.colorId.code)
+        setDefaultIcon(data.moneySource.TagId.iconId.url)
+        setDefaultColorId(data.moneySource.TagId.colorId._id)
+      } catch (error) {
+        console.log("Failed to fetch data on MoneySourceEditScreen: ", error);
+      }
+    };
+    fetchData();
+  }, [navigation]);
   const [popupDeleteVisible, setPopupDeleteVisible] = useState(false);
   const [popupDeleteConfVisible, setPopupDeleteConfVisible] = useState(false);
   const [popupModifiedVisible, setPopupModifiedVisible] = useState(false);
@@ -78,7 +109,7 @@ export default function MoneySourceEditScreen({moneySourceID}) {
       <PopupConfirm 
           popupText={"Đã chỉnh sửa"}
           visible={popupModifiedVisible}
-          onConfirm={() => popupNavigate({screen:"MoneySourceDetailScreen"})}
+          onConfirm={() => popupNavigate({screen:"HomeScreen"})}
       />
       <PopupConfirm 
           popupText={"Đã xóa nguồn tiền"}
@@ -113,21 +144,43 @@ export default function MoneySourceEditScreen({moneySourceID}) {
             </View>
           </View>
 
-          <ColorPicker colorData={FDATA.colorList} onUpdateColor={setDefaultColor}/>
-          <IconPicker iconData={FDATA.iconList} onUpdateIcon={setDefaultIcon}/>
-          <CustomNumpad initValue={defaultBalance} updateValue={setDefaultBalance}/>
+          <ColorPicker colorData={colorList} onUpdateColor={setDefaultColor} onUpdateColorId={setDefaultColorId}/>
+          <IconPicker iconData={iconList} onUpdateIcon={setDefaultIcon} onUpdateIconId={setDefaultIconId}/>
+          <CustomNumpad initValue={defaultBalance} updateValue={setBalance}/>
 
           <View className="flex-1 justify-center items-center flex-row space-x-2">
             <TouchableOpacity
               className="h-[50] bg-slate-300 justify-center items-center py-2.5 px-5 rounded-lg"
-              onPress={() => navigation.navigate('MoneySourceDetailScreen')}
+              onPress={() => navigation.navigate('MoneySourceDetailScreen', {
+                moneySourceID: moneySourceID
+              })}
             >
               <Text className="font-bold text-lg text-purple-900 leading-none">Hủy</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
               className="h-[50] bg-blue-400 justify-center items-center py-2.5 px-5 rounded-lg"
-              onPress={() => openPopup({popupName:"modified"})}
+              onPress={() => {
+                openPopup({popupName:"modified"});
+                try{
+                  updateTag(tagId, {
+                    iconId: defaultIconId,
+                    colorId: defaultColorId,
+                    name: defaultName,
+                    userId: userID
+                  })
+                  updateMoneySource(moneySourceID, {
+                    name: defaultName,
+                    TagId: tagId,
+                    Budget: defaultBalance,
+                    userId: userID,
+                    createAt: new Date()
+                  })
+                }
+                catch (error) {
+                  console.log("Failed to edit Data: ", error);
+                }
+              }}
             >
               <Text className="font-bold text-lg text-purple-900 leading-none">Xong</Text>
             </TouchableOpacity>

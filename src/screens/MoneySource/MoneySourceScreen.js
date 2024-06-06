@@ -11,7 +11,7 @@ import {
 } from "../../services/userService";
 
 import { getMoneySourceByType } from "../../services/moneySourceService";
-export default function MoneySourceScreen() {
+export default function MoneySourceScreen({navigation}) {
   const [balance, setBalance] = useState({});
   const [moneySources, setMoneySources] = useState([]);
   const [savings, setSavings] = useState([]);
@@ -31,7 +31,7 @@ export default function MoneySourceScreen() {
       }
     };
     fetchData();
-  }, []);
+  }, [navigation]);
   return (
     <SafeAreaView>
       <View className="flex-col bg-white w-screen h-screen p-2.5 space-y-1 ">
@@ -46,18 +46,19 @@ export default function MoneySourceScreen() {
             <Text className="font-bold flex-1 text-left text-xl text-purple-900">
               Nguồn tiền
             </Text>
-            <Text className="font-bold flex-1 text-right text-xl text-purple-900">
+            {/* <Text className="font-bold flex-1 text-right text-xl text-purple-900">
               {formattedValue({ value: parseInt(balance.currentBalance) })}
-            </Text>
+            </Text> */}
           </View>
 
           {moneySources.length > 0 &&
             moneySources.map((item, index) => (
               <MoneySource
-                key={index}
-                iconType={item.iconType}
-                moneySourceName={item.name}
-                balance={item.Budget}
+              key={index}
+              moneySourceID={item._id}
+              iconType={"money"}
+              moneySourceName={item.name}
+              balance={item.Budget}
               />
             ))}
 
@@ -68,10 +69,11 @@ export default function MoneySourceScreen() {
           {savings.length > 0 &&
             savings.map((item, index) => (
               <MoneySource
-                key={index}
-                iconType={item.iconType}
-                moneySourceName={item.name}
-                balance={item.Budget}
+              key={index}
+              moneySourceID={item._id}
+              iconType={"gift"}
+              moneySourceName={item.name}
+              balance={item.Budget}
               />
             ))}
 
@@ -84,7 +86,7 @@ export default function MoneySourceScreen() {
               <MoneySource
                 key={index}
                 moneySourceID={item._id}
-                iconType={item.iconType}
+                iconType={"cc-diners-club"}
                 moneySourceName={item.name}
                 balance={item.Budget}
               />

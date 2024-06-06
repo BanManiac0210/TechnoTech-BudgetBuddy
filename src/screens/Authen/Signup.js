@@ -13,6 +13,7 @@ import { COLORS } from "../../constants";
 import { useState } from "react";
 import { TextInput } from "react-native-gesture-handler";
 import axios from "axios";
+import { registerAccount } from "../../services/userService";
 
 export default function Signup() {
   const navigation = useNavigation();
@@ -35,12 +36,14 @@ export default function Signup() {
     }
 
     try {
-      const response = await axios.post("https://example.com/api/signup", {
+      const response = await registerAccount({
+        email: userMail,
+        username: username,
+        password: password,
         firstName: userFirstName,
         lastName: userLastName,
-        email: userMail,
-        username,
-        password,
+        phone: "08XXXXXXXX",
+        totalMoney: 0
       });
 
       // Handle successful signup, e.g., navigate to the success screen
@@ -121,17 +124,17 @@ export default function Signup() {
                 Họ
               </Text>
               <TextInput
-                className="relative h-12 border-2 p-2 w-full border-purple-800 rounded-lg"
+                className="relative h-12 border-2 px-3 py-2 w-full border-purple-800 rounded-lg"
                 value={userFirstName}
                 onChangeText={setUserFirstName}
-                placeholder="Điền họ của bạn..."
+                placeholder="Họ của bạn..."
               />
               {userFirstName.length > 0 && (
                 <TouchableOpacity
                   style={{ position: "absolute", right: 10, top: 14 }}
                   onPress={() => setUserFirstName("")}
                 >
-                  <Icon name="star" size={20} color="gray" />
+                  <Icon name="trash" size={20} color="gray" />
                 </TouchableOpacity>
               )}
             </View>
@@ -145,17 +148,17 @@ export default function Signup() {
                 Tên
               </Text>
               <TextInput
-                className="relative h-12 border-2 p-2 w-full border-purple-800 rounded-lg"
+                className="relative h-12 border-2 px-3 py-2 w-full border-purple-800 rounded-lg"
                 value={userLastName}
                 onChangeText={setUserLastName}
-                placeholder="Điền tên của bạn..."
+                placeholder="Tên của bạn..."
               />
               {userLastName.length > 0 && (
                 <TouchableOpacity
                   style={{ position: "absolute", right: 10, top: 14 }}
                   onPress={() => setUserLastName("")}
                 >
-                  <Icon name="star" size={20} color="gray" />
+                  <Icon name="trash" size={20} color="gray" />
                 </TouchableOpacity>
               )}
             </View>
@@ -170,7 +173,7 @@ export default function Signup() {
               Email
             </Text>
             <TextInput
-              className="relative h-12 border-2 p-2 w-full border-purple-800 rounded-lg"
+              className="relative h-12 border-2 px-3 py-2 w-full border-purple-800 rounded-lg"
               value={userMail}
               onChangeText={setUserMail}
               placeholder="Điền email của bạn..."
@@ -180,7 +183,7 @@ export default function Signup() {
                 style={{ position: "absolute", right: 10, top: 14 }}
                 onPress={() => setUserMail("")}
               >
-                <Icon name="star" size={20} color="gray" />
+                <Icon name="trash" size={20} color="gray" />
               </TouchableOpacity>
             )}
           </View>
@@ -194,7 +197,7 @@ export default function Signup() {
               Tên đăng nhập
             </Text>
             <TextInput
-              className="relative h-12 border-2 p-2 w-full border-purple-800 rounded-lg"
+              className="relative h-12 border-2 px-3 py-2 w-full border-purple-800 rounded-lg"
               value={username}
               onChangeText={setUsername}
               placeholder="Điền tên đăng nhập..."
@@ -204,7 +207,7 @@ export default function Signup() {
                 style={{ position: "absolute", right: 10, top: 14 }}
                 onPress={() => setUsername("")}
               >
-                <Icon name="star" size={20} color="gray" />
+                <Icon name="trash" size={20} color="gray" />
               </TouchableOpacity>
             )}
           </View>
@@ -218,7 +221,7 @@ export default function Signup() {
               Mật khẩu
             </Text>
             <TextInput
-              className="relative h-12 border-2 p-2 w-full border-purple-800 rounded-lg"
+              className="relative h-12 border-2 px-3 py-2 w-full border-purple-800 rounded-lg"
               value={password}
               onChangeText={setPassword}
               placeholder="Điền mật khẩu..."
@@ -229,13 +232,19 @@ export default function Signup() {
                 style={{ position: "absolute", right: 10, top: 14 }}
                 onPress={() => setPassword("")}
               >
-                <Icon name="star" size={20} color="gray" />
+                <Icon name="trash" size={20} color="gray" />
               </TouchableOpacity>
             )}
           </View>
 
           {/* SIGNUP BUTTON */}
           <View className="w-[70%] flex-row space-x-5 items-center justify-center">
+            <TouchableOpacity
+              className="w-[45%] h-10 bg-purple-800 rounded-3xl justify-center items-center"
+              onPress={() => navigation.navigate("Login")}
+            >
+              <Text className="text-white text-md">Quay lại</Text>
+            </TouchableOpacity>
             <TouchableOpacity
               className="w-[45%] h-10 bg-white border-2 border-purple-800 rounded-3xl justify-center items-center"
               onPress={handleSignup}

@@ -3,6 +3,9 @@ import axiosClient from "../utils/axiosClient";
 const getLogs = async () => {
   return await axiosClient.get("historyLog");
 };
+const getLogsByID = async (userID) => {
+  return await axiosClient.get(`historyLog/by-user-id?userId=${userID}`);
+};
 const insertLogs = async (data) => {
   return await axiosClient.post("historyLog", data);
 };
@@ -32,4 +35,5 @@ export {
   deleteLogs,
   getLogByMonth,
   chartTypeByMonth,
+  getLogsByID
 };

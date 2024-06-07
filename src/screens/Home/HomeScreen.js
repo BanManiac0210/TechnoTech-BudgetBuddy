@@ -6,9 +6,11 @@ import { COLORS} from "../../constants";
 import IncomeExpenseTag from "../../components/IncomeExpenseTag";
 import HistoryCardMain from "../../components/HistoryCard/HistoryCardMain";
 import formattedValue from "../../components/formattedValue";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { getUserFromStorage} from "../../services/userService";
 import { getLogsByID, chartTypeByMonth } from "../../services/logService";
+import { getMoneySourceByType } from "../../services/moneySourceService";
+import { useFocusEffect } from "@react-navigation/native";
 export default function HomeScreen({ navigation }) {
   const toMoneySource = () => {
     navigation.navigate("MoneySourceScreen");
@@ -17,31 +19,44 @@ export default function HomeScreen({ navigation }) {
   const [incomeValue, setIncome] = useState(0) //
   const [expenseValue, setExpense] = useState(0) //
   const [history, setHistory] = useState([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const user = await getUserFromStorage(); 
-        setBalance(user.totalMoney)
-        const userLog = await getLogsByID(user._id)
-        setHistory(userLog)
-        
-        const date = new Date();
-        const month = date.getMonth() + 1;
-        const year = date.getFullYear();
-        const dataThu = await chartTypeByMonth(month, year, "thu", user._id);
-        const incomeVal = dataThu.reduce((x, y) => {return x + y})
-        const dataChi = await chartTypeByMonth(month, year, "chi", user._id);
-        const expenseVal = dataChi.reduce((x, y) => {return x + y})
-        setIncome(incomeVal);
-        setExpense(expenseVal)
-
-
-      } catch (error) {
+  const [loading, setLoading] = useState(true);
+  const fetchData = async () => {
+    try {
+      const user = await getUserFromStorage(); 
+      setBalance(user.totalMoney)
+      const userLog = await getLogsByID(user._id)
+      setHistory(userLog)
+      
+      const data = await getMoneySourceByType(user._id);
+      const moneySourceArr = data.moneySources.map(item => ({Budget: item.Budget}))
+      const totalBudget = moneySourceArr.reduce((x, y) => {return parseInt(x) + parseInt(y.Budget)}, [0])
+      setBalance(totalBudget);
+      const date = new Date();
+      const month = date.getMonth() + 1;
+      const year = date.getFullYear();
+      const dataThu = await chartTypeByMonth(month, year, "thu", user._id);
+      const incomeVal = dataThu.reduce((x, y) => {return parseInt(x) + parseInt(y)}, [0])
+      const dataChi = await chartTypeByMonth(month, year, "chi", user._id);
+      const expenseVal = dataChi.reduce((x, y) => {return parseInt(x) + parseInt(y)}, [0])
+      setIncome(incomeVal);
+      setExpense(expenseVal)
+      setLoading(false);
+    } catch (error) {
         console.log("Failed to fetch data: ", error);
-      }
-    };
-    fetchData();
-  }, [navigation]);
+        setLoading(false);
+    }};
+
+      useFocusEffect(
+        useCallback(() => {
+          setLoading(true);
+          fetchData();
+    
+          // Clean-up function (if needed)
+          return () => {
+            // Clean-up code (if needed)
+          };
+        }, [])
+      );
   return (
     <SafeAreaView>
       <View className="flex-col bg-white w-screen h-screen p-2.5 space-y-1">

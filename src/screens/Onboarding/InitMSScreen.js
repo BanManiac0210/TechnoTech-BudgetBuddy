@@ -1,12 +1,60 @@
 import { useNavigation } from '@react-navigation/native';
-import { Text, View, TouchableOpacity, ImageBackground, Image, ScrollView } from 'react-native';
+import { Text, View, TouchableOpacity, ImageBackground, Image, ScrollView, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { COLORS, FDATA } from '../../constants';
 import CategoryTag from '../../components/Tags/CategoryTag';
+import { useEffect } from 'react';
+import { createTag } from '../../services/tagService';
+import { createMoneySource } from '../../services/moneySourceService';
+import { getUserFromStorage } from '../../services/userService';
 
-export default function InitMoneySourceScreen({moneySourceData}) {
+export default function InitMoneySourceScreen({}) {
   const navigation = useNavigation()
+  useEffect(() => {
+    const initMoneySource = async () => {
+      try{
+        const user = await getUserFromStorage();
+        const tag1 = await createTag({
+          iconId: "6661dc6ae3f66c3a5cbd97c5",
+          colorId: "6661daf0e3f66c3a5cbd97a7",
+          name: "Ngân hàng",
+          userId: user._id
+        })
+        const moneySource1 = await createMoneySource({
+          "name": "Ngân hàng",
+          "TagId": tag1._id,
+          "Budget": 0,
+          "type": "nguontien",
+          "userId": user._id,
+          "createdAt": new Date()
+        })
+
+        const tag2 = await createTag({
+          iconId: "6661dd0be3f66c3a5cbd97eb",
+          colorId: "6661daf8e3f66c3a5cbd97ab",
+          name: "Tiền mặt",
+          userId: user._id
+        })
+        const moneySource2 = await createMoneySource({
+          "name": "Tiền mặt",
+          "TagId": tag2._id,
+          "Budget": 0,
+          "type": "nguontien",
+          "userId": user._id,
+          "createdAt": new Date()
+        })
+
+      }
+      catch (error) {
+        console.log("Error: ", error);
+      } 
+    }
+
+    initMoneySource();
+
+  }, [navigation]);
+
   return (
     <View className="w-full h-full bg-white items-center justify-start">
         <ImageBackground
@@ -28,12 +76,14 @@ export default function InitMoneySourceScreen({moneySourceData}) {
         <View className="flex-1 w-full mb-2.5 p-2.5 justify-center items-center"> 
           <View className="flex-1 w-full mb-2.5 px-[40] py-2.5 flex-col justify-center items-center ">
             <Text className="font-bold w-full text-xl my-2 text-left text-purple-900">Tạo nguồn tiền</Text>
-            <ScrollView 
+            <ScrollView className="w-full"
               contentContainerStyle={{
-                opacity: 1,
+                opacity: 1, 
                 flexWrap: 'wrap',
                 flexDirection: 'row',
-                justifyContent: 'flex-start'
+                justifyContent: 'flex-start',
+                alignContent:'flex-start',
+                alignItems:'flex-start'
               }} 
               showsVerticalScrollIndicator={false}
             >
@@ -50,7 +100,7 @@ export default function InitMoneySourceScreen({moneySourceData}) {
             <View className="w-full flex-row">
               <TouchableOpacity
                 className="px-2 py-[6] rounded-lg flex-row items-center space-x-2 mr-1 bg-purple-300"
-                onPress={() => navigation.navigate("AddInitMoneySourceScreen")}
+                onPress={() => {Alert.alert("Lỗi", "Tính năng này chưa được hỗ trợ.");}}
               >
                 <Icon name="plus" size={16} color="white"/>
                 <Text className="font-bold text-white">Tạo mới</Text>

@@ -1,4 +1,4 @@
-import { ScrollView, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import { Alert, ScrollView, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useState, useEffect } from 'react';
 import { COLORS, FDATA } from '../../constants';
@@ -10,7 +10,7 @@ import CustomNumpad from '../../components/CustomNumpad';
 import PopupAsk from '../../components/Popups/PopupAsk';
 import PopupConfirm from '../../components/Popups/PopupConfirm';
 import { getUserFromStorage } from '../../services/userService';
-import { getDetailMoneySourceById, updateMoneySource } from '../../services/moneySourceService';
+import { deleteMoneySource, getDetailMoneySourceById, updateMoneySource } from '../../services/moneySourceService';
 import { getColors, getIcons } from '../../services/componentService';
 import { updateTag } from '../../services/tagService';
 
@@ -64,7 +64,13 @@ export default function MoneySourceEditScreen({route, navigation}) {
         setPopupModifiedVisible(true)
         break;
       default:
-        setPopupDeleteConfVisible(true)
+        try {
+          const response = deleteMoneySource(moneySourceID)
+          setPopupDeleteConfVisible(true)
+        }
+        catch (error) {
+          Alert.alert("Lỗi!", "Không thể xóa nguồn tiền vào lúc này!")
+        }
     }
   };
   const closePopup = ({popupName}) => {

@@ -1,12 +1,55 @@
 import { useNavigation } from '@react-navigation/native';
-import { Text, View, TouchableOpacity, ImageBackground, Image, ScrollView } from 'react-native';
+import { Text, View, TouchableOpacity, ImageBackground, Image, ScrollView, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { COLORS, FDATA } from '../../constants';
 import CategoryTag from '../../components/Tags/CategoryTag';
+import { useEffect } from 'react';
+import { createTag } from '../../services/tagService';
+import { createMoneySource } from '../../services/moneySourceService';
+import { getUserFromStorage } from '../../services/userService';
 
 export default function InitCategoryScreen({moneySourceData}) {
   const navigation = useNavigation()
+  useEffect(() => {
+    const initCategory = async () => {
+      try{
+        const user = await getUserFromStorage();
+        const tag1 = await createTag({
+          iconId: "6661dcb3e3f66c3a5cbd97cb",
+          colorId: "6661daf0e3f66c3a5cbd97a7",
+          name: "Ăn uống",
+          userId: user._id
+        })
+        const tag2 = await createTag({
+          iconId: "6661dcc5e3f66c3a5cbd97d3",
+          colorId: "6661db01e3f66c3a5cbd97af",
+          name: "Học tập",
+          userId: user._id
+        })
+        const tag3 = await createTag({
+          iconId: "6661dce5e3f66c3a5cbd97e1",
+          colorId: "6661db0ee3f66c3a5cbd97b5",
+          name: "Mua sắm",
+          userId: user._id
+        })
+        const tag4 = await createTag({
+          iconId: "6661dcbce3f66c3a5cbd97cf",
+          colorId: "6661db12e3f66c3a5cbd97b7",
+          name: "Di chuyển",
+          userId: user._id
+        })
+      }
+      catch (error) {
+        console.log("Error: ", error);
+      } 
+    }
+
+    initCategory();
+
+  }, [navigation]);
+
+
   return (
     <View className="w-full h-full bg-white items-center justify-start">
         <ImageBackground
@@ -50,7 +93,7 @@ export default function InitCategoryScreen({moneySourceData}) {
             <View className="w-full flex-row">
               <TouchableOpacity
                 className="px-2 py-[6] rounded-lg flex-row items-center space-x-2 mr-1 bg-purple-300"
-                onPress={() => navigation.navigate("AddCategoryScreen")}
+                onPress={() => {Alert.alert("Lỗi", "Tính năng này chưa được hỗ trợ.");}}
               >
                 <Icon name="plus" size={16} color="white"/>
                 <Text className="font-bold text-white">Tạo mới</Text>

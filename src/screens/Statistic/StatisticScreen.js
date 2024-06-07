@@ -27,9 +27,9 @@ export default function StatisticScreen() {
         const month = date.getMonth() + 1;
         const year = date.getFullYear();
         const dataThu = await chartTypeByMonth(month, year, "thu", user._id);
-        const incomeVal = dataThu.reduce((x, y) => {return x + y})
+        const incomeVal = dataThu.reduce((x, y) => {return x + y}, [0])
         const dataChi = await chartTypeByMonth(month, year, "chi", user._id);
-        const expenseVal = dataChi.reduce((x, y) => {return x + y})
+        const expenseVal = dataChi.reduce((x, y) => {return x + y}, [0])
         setIncome(incomeVal);
         setExpense(expenseVal)
 

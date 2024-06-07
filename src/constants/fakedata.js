@@ -1,9 +1,9 @@
 // import MoneySource from "../components/MoneySource";
 
 const FDATA = {
-    currentBalance: -20000,
-    incomeValue: 350000,
-    expenseValue: 4500000,
+    currentBalance: 2000000,
+    incomeValue: 500000,
+    expenseValue: 400000,
     tagName: "Ăn uống",
     tagIconName: "cutlery",
     tagColor: "#9984CF",
@@ -197,46 +197,22 @@ const FDATA = {
   tagList: [
     {
       "id": 1,
-      "tagName": "Salary",
+      "tagName": "Tiền mặt",
       "tagIconName": "money",
       "tagColor": "#7E57C2"
     },
     {
       "id": 2,
-      "tagName": "Freelance",
+      "tagName": "Ngân hàng",
       "tagIconName": "briefcase",
       "tagColor": "#D1C4E9"
-    },
-    {
-      "id": 3,
-      "tagName": "Investments",
-      "tagIconName": "line-chart",
-      "tagColor": "#B39DDB"
-    },
-    {
-      "id": 4,
-      "tagName": "Gifts",
-      "tagIconName": "gift",
-      "tagColor": "#9575CD"
-    },
-    {
-      "id": 5,
-      "tagName": "Savings",
-      "tagIconName": "gift",
-      "tagColor": "#7E57C2"
-    },
-    {
-      "id": 6,
-      "tagName": "Rental Income",
-      "tagIconName": "home",
-      "tagColor": "#673AB7"
     }
   ],
   categoryList: [
     {
         "id": 1,
-        "tagIconName": "star",
-        "tagName": "Thức ăn",
+        "tagIconName": "cutlery",
+        "tagName": "Ăn uống",
         "tagColor": "#800080"  // Purple color
     },
     {
@@ -248,20 +224,14 @@ const FDATA = {
     {
         "id": 3,
         "tagIconName": "thumbs-up",
-        "tagName": "Giải trí",
+        "tagName": "Học tập",
         "tagColor": "#8A2BE2"  // Blue Violet color
     },
     {
         "id": 4,
         "tagIconName": "car",
-        "tagName": "Giao thông",
+        "tagName": "Di chuyển",
         "tagColor": "#9400D3"  // Dark Violet color
-    },
-    {
-        "id": 5,
-        "tagIconName": "home",
-        "tagName": "Tiện ích",
-        "tagColor": "#D8BFD8"  // Thistle color
     }
   ]
 };
